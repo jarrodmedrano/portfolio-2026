@@ -19,7 +19,7 @@ export const projects: Project[] = [
     techStack: ['Next.js', 'TypeScript', 'OpenAI', 'Tailwind', 'Vercel'],
     liveUrl: 'https://portuguese-verbs.example.com',
     codeUrl: 'https://github.com/jarrodmedrano/portuguese-verbs',
-    imageUrl: '/projects/portuguese-verbs.png',
+    imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Portuguese+Verbs',
   },
   {
     id: 'jarrod-starter',
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     techStack: ['Next.js', 'Prisma', 'PostgreSQL', 'NextAuth', 'Vitest'],
     liveUrl: 'https://jarrod-starter.example.com',
     codeUrl: 'https://github.com/jarrodmedrano/jarrod-starter',
-    imageUrl: '/projects/jarrod-starter.png',
+    imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Jarrod+Starter',
   },
   {
     id: 'story-bible',
@@ -40,7 +40,7 @@ export const projects: Project[] = [
       'Collaborative writing tool for screenwriters and novelists. Features character tracking, timeline management, and AI-powered plot suggestions.',
     techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'AWS'],
     liveUrl: 'https://story-bible.example.com',
-    imageUrl: '/projects/story-bible.png',
+    imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Story+Bible',
   },
   {
     id: 'binary-quiz',
@@ -51,6 +51,6 @@ export const projects: Project[] = [
     techStack: ['Next.js', 'TypeScript', 'Tailwind', 'Supabase'],
     liveUrl: 'https://binary-quiz.example.com',
     codeUrl: 'https://github.com/jarrodmedrano/binary-quiz',
-    imageUrl: '/projects/binary-quiz.png',
+    imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Binary+Quiz',
   },
 ];
