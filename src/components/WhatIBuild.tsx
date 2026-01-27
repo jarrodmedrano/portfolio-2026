@@ -51,13 +51,8 @@ export default function WhatIBuild() {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true, margin: '-100px' }}
-              variants={{
-                ...fadeInUp,
-                transition: {
-                  ...fadeInUp.transition,
-                  delay: index * 0.1,
-                },
-              }}
+              variants={fadeInUp}
+              transition={{ delay: index * 0.1 }}
             >
               <div className="border-b border-black pb-2 mb-4">
                 <h3 className="text-2xl font-semibold text-black">
@@ -93,13 +88,8 @@ export default function WhatIBuild() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, margin: '-100px' }}
-          variants={{
-            ...fadeInUp,
-            transition: {
-              ...fadeInUp.transition,
-              delay: 0.2,
-            },
-          }}
+          variants={fadeInUp}
+          transition={{ delay: 0.2 }}
         >
           <div className="border-b border-black pb-2 mb-4">
             <h3 className="text-2xl font-semibold text-black">

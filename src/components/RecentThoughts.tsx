@@ -102,10 +102,7 @@ export default function RecentThoughts() {
                 whileInView="animate"
                 viewport={{ once: true, margin: '-100px' }}
                 variants={fadeInUp}
-                transition={{
-                  ...fadeInUp.transition,
-                  delay: index * 0.1,
-                }}
+                transition={{ delay: index * 0.1 }}
               >
                 <p className="text-base text-gray-900 leading-relaxed mb-3">
                   {post.text}

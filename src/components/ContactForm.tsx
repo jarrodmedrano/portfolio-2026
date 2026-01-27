@@ -130,13 +130,8 @@ export default function ContactForm() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, margin: '-100px' }}
-            variants={{
-              ...fadeInUp,
-              transition: {
-                ...fadeInUp.transition,
-                delay: 0.1,
-              },
-            }}
+            variants={fadeInUp}
+            transition={{ delay: 0.1 }}
           >
             <div className="space-y-4">
               {/* Name */}
