@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
 
+const CONFIG = {
+  HANDLE: 'jarrodmedrano.bsky.social',
+  POST_LIMIT: 5,
+  CACHE_DURATION: 300, // 5 minutes
+} as const;
+
 interface BlueSkyPost {
   post: {
     uri: string;
@@ -20,15 +26,13 @@ interface BlueSkyResponse {
 export async function GET() {
   try {
     // BlueSky API endpoint for fetching posts
-    // Replace with actual BlueSky handle
-    const handle = 'jarrodmedrano.bsky.social';
-    const apiUrl = `https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${handle}&limit=5`;
+    const apiUrl = `https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=${CONFIG.HANDLE}&limit=${CONFIG.POST_LIMIT}`;
 
     const response = await fetch(apiUrl, {
       headers: {
         'Content-Type': 'application/json',
       },
-      next: { revalidate: 300 }, // Cache for 5 minutes
+      next: { revalidate: CONFIG.CACHE_DURATION },
     });
 
     if (!response.ok) {
@@ -49,8 +53,9 @@ export async function GET() {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('BlueSky API error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to fetch posts' },
+      { error: 'Failed to fetch posts', details: errorMessage },
       { status: 500 },
     );
   }

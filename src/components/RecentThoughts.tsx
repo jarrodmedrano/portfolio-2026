@@ -11,17 +11,24 @@ interface Post {
   author: string;
 }
 
+const CONFIG = {
+  MAX_POSTS: 3,
+  MS_PER_DAY: 1000 * 60 * 60 * 24,
+  BLUESKY_PROFILE: 'https://bsky.app/profile/jarrodmedrano.bsky.social',
+  API_ENDPOINT: '/api/bluesky',
+} as const;
+
 export default function RecentThoughts() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch('/api/bluesky')
+    fetch(CONFIG.API_ENDPOINT)
       .then((res) => res.json())
       .then((data) => {
         if (data.posts) {
-          setPosts(data.posts.slice(0, 3));
+          setPosts(data.posts.slice(0, CONFIG.MAX_POSTS));
         } else {
           setError(true);
         }
@@ -37,7 +44,7 @@ export default function RecentThoughts() {
     const date = new Date(dateString);
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.ceil(diffTime / CONFIG.MS_PER_DAY);
 
     if (diffDays === 0) return 'Today';
     if (diffDays === 1) return 'Yesterday';
@@ -72,7 +79,7 @@ export default function RecentThoughts() {
               Unable to load posts at this time.
             </p>
             <a
-              href="https://bsky.app/profile/jarrodmedrano.bsky.social"
+              href={CONFIG.BLUESKY_PROFILE}
               target="_blank"
               rel="noopener noreferrer"
               className="text-black underline hover:text-gray-700"
@@ -94,12 +101,10 @@ export default function RecentThoughts() {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true, margin: '-100px' }}
-                variants={{
-                  ...fadeInUp,
-                  transition: {
-                    ...fadeInUp.transition,
-                    delay: index * 0.1,
-                  },
+                variants={fadeInUp}
+                transition={{
+                  ...fadeInUp.transition,
+                  delay: index * 0.1,
                 }}
               >
                 <p className="text-base text-gray-900 leading-relaxed mb-3">
@@ -115,7 +120,7 @@ export default function RecentThoughts() {
 
             <div className="text-center mt-8">
               <a
-                href="https://bsky.app/profile/jarrodmedrano.bsky.social"
+                href={CONFIG.BLUESKY_PROFILE}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-black underline hover:text-gray-700"
