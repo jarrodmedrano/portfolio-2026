@@ -195,6 +195,11 @@ const config: Config = {
         'icon-lg': '2rem',
         'icon-xl': '2.5rem',
       },
+
+      // Custom scale utilities
+      scale: {
+        102: '1.02',
+      },
     },
   },
   plugins: [],
