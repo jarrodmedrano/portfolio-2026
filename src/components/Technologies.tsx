@@ -63,7 +63,7 @@ export default function Technologies() {
         >
           {techCategories.map((tech) => (
             <div key={tech.category} className="text-base">
-              <span className="font-semibold text-black">
+              <span className="font-bold text-black">
                 {tech.category}
                 :
               </span>
