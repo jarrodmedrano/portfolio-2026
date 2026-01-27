@@ -2,6 +2,7 @@ import {
   describe, it, expect, beforeEach, vi,
 } from 'vitest';
 import type { Mock } from 'vitest';
+import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { POST } from './route';
 
@@ -34,7 +35,7 @@ describe('POST /api/contact', () => {
     mockCount.mockResolvedValue(0);
     mockCreate.mockResolvedValue({ id: '123' });
 
-    const request = new Request('http://localhost:3000/api/contact', {
+    const request = new NextRequest('http://localhost:3000/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(validData),
@@ -51,7 +52,7 @@ describe('POST /api/contact', () => {
   });
 
   it('rejects honeypot submissions', async () => {
-    const request = new Request('http://localhost:3000/api/contact', {
+    const request = new NextRequest('http://localhost:3000/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...validData, website: 'http://spam.com' }),
@@ -68,7 +69,7 @@ describe('POST /api/contact', () => {
   it('enforces rate limiting (3 per hour)', async () => {
     mockCount.mockResolvedValue(3);
 
-    const request = new Request('http://localhost:3000/api/contact', {
+    const request = new NextRequest('http://localhost:3000/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(validData),
@@ -82,7 +83,7 @@ describe('POST /api/contact', () => {
   });
 
   it('validates required fields', async () => {
-    const request = new Request('http://localhost:3000/api/contact', {
+    const request = new NextRequest('http://localhost:3000/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: 'J' }), // Missing fields
