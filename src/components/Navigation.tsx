@@ -5,12 +5,32 @@ import { motion } from 'framer-motion';
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // Detect which section is currently in view
+      const sections = ['hero', 'work', 'capabilities', 'tech', 'thoughts', 'contact'];
+      const offset = 100; // Offset from top to account for navigation
+
+      const currentSection = sections.find((sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Check if section is in viewport (with offset)
+          return rect.top <= offset && rect.bottom > offset;
+        }
+        return false;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
     };
 
+    handleScroll(); // Call once on mount
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -61,7 +81,9 @@ export default function Navigation() {
               key={item.id}
               type="button"
               onClick={() => scrollToSection(item.id)}
-              className="text-sm font-medium transition-all hover:opacity-70"
+              className={`text-sm font-medium transition-all hover:opacity-70 relative ${
+                activeSection === item.id ? 'after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[2px] after:bg-current' : ''
+              }`}
             >
               {item.label}
             </button>
