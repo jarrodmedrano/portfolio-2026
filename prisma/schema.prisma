@@ -15,4 +15,6 @@ model ContactSubmission {
   message     String   @db.Text
   budget      String?
   createdAt   DateTime @default(now())
+
+  @@index([email, createdAt])
 }
