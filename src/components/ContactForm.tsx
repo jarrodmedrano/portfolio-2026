@@ -7,239 +7,283 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
+import { fadeInUp } from '@/lib/animations';
 
 const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Valid email is required'),
   projectType: z.string().min(1, 'Please select a project type'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
   budget: z.string().optional(),
-  honeypot: z.string().optional(),
+  website: z.string().optional(), // Honeypot field
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-};
-
 export default function ContactForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: 'success' | 'error' | null;
-    message: string;
-  }>({ type: null, message: '' });
+  const [submitStatus, setSubmitStatus] = useState<
+  'idle' | 'loading' | 'success' | 'error'
+  >('idle');
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
+    formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: '' });
+    setSubmitStatus('loading');
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitStatus({
-          type: 'success',
-          message: result.message || 'Thank you for your message!',
-        });
-        reset();
-      } else {
-        setSubmitStatus({
-          type: 'error',
-          message: result.error || 'Something went wrong. Please try again.',
-        });
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
       }
+
+      setSubmitStatus('success');
+      reset();
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
     } catch (error) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Network error. Please check your connection and try again.',
-      });
-    } finally {
-      setIsSubmitting(false);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 5000);
     }
   };
 
   return (
-    <motion.div {...fadeInUp} className="max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Honeypot field - hidden from users */}
-        <input
-          type="text"
-          {...register('honeypot')}
-          style={{
-            position: 'absolute',
-            left: '-9999px',
-            width: '1px',
-            height: '1px',
-          }}
-          tabIndex={-1}
-          autoComplete="off"
-          aria-hidden="true"
-        />
-
-        {/* Name field */}
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-white mb-2"
-          >
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            {...register('name')}
-            className={`w-full px-4 py-3 bg-black border ${
-              errors.name ? 'border-red-500' : 'border-white/20'
-            } text-white placeholder-white/50 focus:outline-none focus:border-white transition-colors`}
-            placeholder="John Doe"
-          />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
-          )}
+    <section id="contact" className="py-24 px-6 bg-white">
+      <div className="container mx-auto max-w-6xl">
+        <div className="mb-16">
+          <h2 className="text-4xl font-bold text-black mb-4">Let&apos;s Talk</h2>
+          <div className="w-full h-px bg-black" />
         </div>
 
-        {/* Email field */}
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-white mb-2"
-          >
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            {...register('email')}
-            className={`w-full px-4 py-3 bg-black border ${
-              errors.email ? 'border-red-500' : 'border-white/20'
-            } text-white placeholder-white/50 focus:outline-none focus:border-white transition-colors`}
-            placeholder="john@example.com"
-          />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-          )}
-        </div>
-
-        {/* Project Type field */}
-        <div>
-          <label
-            htmlFor="projectType"
-            className="block text-sm font-medium text-white mb-2"
-          >
-            Project Type
-          </label>
-          <select
-            id="projectType"
-            {...register('projectType')}
-            className={`w-full px-4 py-3 bg-black border ${
-              errors.projectType ? 'border-red-500' : 'border-white/20'
-            } text-white focus:outline-none focus:border-white transition-colors`}
-          >
-            <option value="">Select a project type</option>
-            <option value="web-app">Web Application</option>
-            <option value="mobile-app">Mobile App</option>
-            <option value="website">Website</option>
-            <option value="ecommerce">E-commerce</option>
-            <option value="consulting">Consulting</option>
-            <option value="other">Other</option>
-          </select>
-          {errors.projectType && (
-            <p className="mt-1 text-sm text-red-500">
-              {errors.projectType.message}
-            </p>
-          )}
-        </div>
-
-        {/* Budget field (optional) */}
-        <div>
-          <label
-            htmlFor="budget"
-            className="block text-sm font-medium text-white mb-2"
-          >
-            Budget (Optional)
-          </label>
-          <select
-            id="budget"
-            {...register('budget')}
-            className="w-full px-4 py-3 bg-black border border-white/20 text-white focus:outline-none focus:border-white transition-colors"
-          >
-            <option value="">Select a budget range</option>
-            <option value="under-5k">Under $5,000</option>
-            <option value="5k-10k">$5,000 - $10,000</option>
-            <option value="10k-25k">$10,000 - $25,000</option>
-            <option value="25k-50k">$25,000 - $50,000</option>
-            <option value="50k-plus">$50,000+</option>
-          </select>
-        </div>
-
-        {/* Message field */}
-        <div>
-          <label
-            htmlFor="message"
-            className="block text-sm font-medium text-white mb-2"
-          >
-            Message
-          </label>
-          <textarea
-            id="message"
-            {...register('message')}
-            rows={6}
-            className={`w-full px-4 py-3 bg-black border ${
-              errors.message ? 'border-red-500' : 'border-white/20'
-            } text-white placeholder-white/50 focus:outline-none focus:border-white transition-colors resize-none`}
-            placeholder="Tell me about your project..."
-          />
-          {errors.message && (
-            <p className="mt-1 text-sm text-red-500">
-              {errors.message.message}
-            </p>
-          )}
-        </div>
-
-        {/* Submit button */}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full px-8 py-4 bg-white text-black font-medium hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
-        </button>
-
-        {/* Status messages */}
-        {submitStatus.type && (
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`p-4 border ${
-              submitStatus.type === 'success'
-                ? 'border-green-500 text-green-500'
-                : 'border-red-500 text-red-500'
-            }`}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={fadeInUp}
           >
-            {submitStatus.message}
+            <div className="border-b border-black pb-2 mb-4">
+              <h3 className="text-2xl font-semibold text-black">
+                Currently Available
+              </h3>
+            </div>
+
+            <p className="text-base text-gray-700 leading-normal mb-4">
+              Taking on new projects starting March 2026.
+            </p>
+
+            <div className="space-y-2 text-base text-gray-700 mb-6">
+              <p>Response time: Within 24 hours</p>
+              <p>Location: Austin, TX (Remote work available)</p>
+            </div>
+
+            <div className="space-y-2">
+              <a
+                href="mailto:jarrod@jarrodmedrano.com"
+                className="block text-black underline hover:text-gray-700"
+              >
+                jarrod@jarrodmedrano.com
+              </a>
+              <a
+                href="https://github.com/jarrodmedrano"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-black underline hover:text-gray-700"
+              >
+                GitHub →
+              </a>
+              <a
+                href="https://bsky.app/profile/jarrodmedrano.bsky.social"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-black underline hover:text-gray-700"
+              >
+                BlueSky →
+              </a>
+              <a
+                href="https://www.linkedin.com/in/jarrod-medrano-b89b0037"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-black underline hover:text-gray-700"
+              >
+                LinkedIn →
+              </a>
+            </div>
           </motion.div>
-        )}
-      </form>
-    </motion.div>
+
+          {/* Contact Form */}
+          <motion.form
+            onSubmit={handleSubmit(onSubmit)}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={{
+              ...fadeInUp,
+              transition: {
+                ...fadeInUp.transition,
+                delay: 0.1,
+              },
+            }}
+          >
+            <div className="space-y-4">
+              {/* Name */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-900 mb-2"
+                >
+                  Name *
+                </label>
+                <input
+                  {...register('name')}
+                  type="text"
+                  id="name"
+                  className={`input ${errors.name ? 'input-error' : ''}`}
+                />
+                {errors.name && (
+                  <p className="text-xs text-error-500 font-medium mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Email */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-900 mb-2"
+                >
+                  Email *
+                </label>
+                <input
+                  {...register('email')}
+                  type="email"
+                  id="email"
+                  className={`input ${errors.email ? 'input-error' : ''}`}
+                />
+                {errors.email && (
+                  <p className="text-xs text-error-500 font-medium mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Project Type */}
+              <div>
+                <label
+                  htmlFor="projectType"
+                  className="block text-sm font-medium text-gray-900 mb-2"
+                >
+                  Project Type
+                </label>
+                <select
+                  {...register('projectType')}
+                  id="projectType"
+                  className={`input ${
+                    errors.projectType ? 'input-error' : ''
+                  }`}
+                >
+                  <option value="">Select...</option>
+                  <option value="mvp">MVP Development</option>
+                  <option value="production">Production App</option>
+                  <option value="consulting">Consulting</option>
+                  <option value="not-sure">Not Sure</option>
+                </select>
+                {errors.projectType && (
+                  <p className="text-xs text-error-500 font-medium mt-1">
+                    {errors.projectType.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Message */}
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-900 mb-2"
+                >
+                  Message *
+                </label>
+                <textarea
+                  {...register('message')}
+                  id="message"
+                  rows={4}
+                  className={`input resize-y ${
+                    errors.message ? 'input-error' : ''
+                  }`}
+                />
+                {errors.message && (
+                  <p className="text-xs text-error-500 font-medium mt-1">
+                    {errors.message.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Budget */}
+              <div>
+                <label
+                  htmlFor="budget"
+                  className="block text-sm font-medium text-gray-900 mb-2"
+                >
+                  Budget Range (Optional)
+                </label>
+                <select {...register('budget')} id="budget" className="input">
+                  <option value="">Select...</option>
+                  <option value="<10k">&lt;$10k</option>
+                  <option value="10k-25k">$10k-25k</option>
+                  <option value="25k-50k">$25k-50k</option>
+                  <option value="50k+">$50k+</option>
+                  <option value="hourly">Hourly/Retainer</option>
+                </select>
+              </div>
+
+              {/* Honeypot */}
+              <input
+                {...register('website')}
+                type="text"
+                name="website"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={submitStatus === 'loading'}
+                className="btn-primary w-full md:w-auto"
+              >
+                {submitStatus === 'loading' ? 'Sending...' : 'Send Message'}
+              </button>
+
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <p className="text-sm text-success-500 font-medium">
+                  Message sent! I&apos;ll get back to you within 24 hours.
+                </p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="text-sm text-error-500 font-medium">
+                  Failed to send message. Please try again or email me directly.
+                </p>
+              )}
+            </div>
+          </motion.form>
+        </div>
+      </div>
+    </section>
   );
 }

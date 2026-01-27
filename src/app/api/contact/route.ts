@@ -8,48 +8,15 @@ const contactSchema = z.object({
   projectType: z.string().min(1, 'Please select a project type'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
   budget: z.string().optional(),
-  honeypot: z.string().optional(),
+  website: z.string().optional(), // Honeypot field
 });
-
-// Simple rate limiting using in-memory store
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT = 5; // 5 requests
-const RATE_WINDOW = 60 * 60 * 1000; // per hour
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
-    return true;
-  }
-
-  if (record.count >= RATE_LIMIT) {
-    return false;
-  }
-
-  record.count += 1;
-  return true;
-}
 
 export async function POST(request: NextRequest) {
   try {
-    // Get IP for rate limiting
-    const ip = request.ip ?? 'unknown';
-
-    // Check rate limit
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
-        { status: 429 },
-      );
-    }
-
     const body = await request.json();
 
     // Honeypot check
-    if (body.honeypot) {
+    if (body.website) {
       return NextResponse.json(
         { message: 'Thank you for your message!' },
         { status: 200 },
@@ -58,6 +25,24 @@ export async function POST(request: NextRequest) {
 
     // Validate data
     const validatedData = contactSchema.parse(body);
+
+    // Rate limiting check (simple email-based)
+    // In production, use Redis or similar
+    const recentSubmissions = await prisma.contactSubmission.count({
+      where: {
+        email: validatedData.email,
+        createdAt: {
+          gte: new Date(Date.now() - 60 * 60 * 1000), // Last hour
+        },
+      },
+    });
+
+    if (recentSubmissions >= 3) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 },
+      );
+    }
 
     // Store in database
     await prisma.contactSubmission.create({
@@ -70,10 +55,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(
-      { message: 'Thank you for your message! I will get back to you soon.' },
-      { status: 200 },
-    );
+    return NextResponse.json({ success: true });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
