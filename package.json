@@ -19,6 +19,7 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
+    "@atproto/api": "^0.18.17",
     "@jarrodmedrano/claude-skills": "^1.0.2",
     "@prisma/client": "^6.2.0",
     "bcryptjs": "^2.4.3",
