@@ -1,0 +1,24 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@jarrodmedrano/claude-skills':
+        specifier: ^1.0.2
+        version: 1.0.15
+
+packages:
+
+  '@jarrodmedrano/claude-skills@1.0.15':
+    resolution: {integrity: sha512-U5y2ZWX0d2If1cO0GfglovOrk8z+J2u41WTotG8Lk4F4/29G3oCxbV2WGg9+S/pK5MgOu/KfXEZBrXbkeRoMNQ==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
+snapshots:
+
+  '@jarrodmedrano/claude-skills@1.0.15': {}

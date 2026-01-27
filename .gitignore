@@ -7,11 +7,20 @@ pnpm-debug.log*
 # Build outputs
 dist/
 build/
+.next/
+out/
 
 # Environment files
 .env
 .env.local
 .env.*.local
+
+# Testing
+coverage/
+.vitest/
+
+# Prisma
+prisma/migrations/
 
 # IDE
 .idea/
@@ -26,3 +35,7 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
