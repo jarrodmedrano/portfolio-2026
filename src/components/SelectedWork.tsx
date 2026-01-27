@@ -1,7 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { staggerContainer } from '@/lib/animations';
 import { projects } from '@/data/projects';
 import ProjectCard from './ProjectCard';
 
@@ -17,17 +15,12 @@ export default function SelectedWork() {
           <div className="h-px bg-black w-full" />
         </div>
 
-        {/* Projects List */}
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+        {/* Projects Grid */}
+        <div className="grid md:grid-cols-2 gap-12">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

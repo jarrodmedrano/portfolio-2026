@@ -5,7 +5,17 @@
       "Bash(git init:*)",
       "Bash(npm install)",
       "Bash(npx husky init)",
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "Bash(pnpm add:*)",
+      "Bash(npx playwright install)",
+      "Skill(design-review:design-review-slash-command)",
+      "Bash(npx playwright:*)",
+      "Bash(curl:*)",
+      "Bash(node /tmp/check-page.js:*)",
+      "Bash(node /tmp/browser-check.mjs:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs ps:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }
