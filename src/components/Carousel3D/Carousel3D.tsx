@@ -8,6 +8,7 @@ import {
 import type { CarouselItem } from '@/types/carousel';
 import { getCardTransform } from './utils';
 import CarouselCard from './CarouselCard';
+import CarouselControls from './CarouselControls';
 import styles from './Carousel3D.module.css';
 
 interface Carousel3DProps {
@@ -120,6 +121,12 @@ export default function Carousel3D({
           );
         })}
       </div>
+      <CarouselControls
+        onPrev={navigatePrev}
+        onNext={navigateNext}
+        onToggleAutoPlay={toggleAutoPlay}
+        isAutoPlaying={isAutoPlaying}
+      />
     </div>
   );
 }

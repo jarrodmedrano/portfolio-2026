@@ -1,0 +1,77 @@
+.controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.button {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid black;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  pointer-events: all;
+}
+
+.button:hover {
+  background: black;
+  color: white;
+}
+
+.button:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+.buttonLeft {
+  left: -80px;
+}
+
+.buttonRight {
+  right: -80px;
+}
+
+.pauseButton {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(calc(-50% + 100px));
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  background: white;
+  border-radius: 4px;
+  pointer-events: all;
+}
+
+@media (max-width: 768px) {
+  .buttonLeft {
+    left: 10px;
+    bottom: -60px;
+    top: auto;
+    width: 40px;
+    height: 40px;
+  }
+
+  .buttonRight {
+    right: 10px;
+    bottom: -60px;
+    top: auto;
+    width: 40px;
+    height: 40px;
+  }
+
+  .pauseButton {
+    bottom: -60px;
+    transform: translateX(-50%);
+  }
+}
