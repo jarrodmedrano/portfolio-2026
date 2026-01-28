@@ -104,7 +104,7 @@ export default function RecentThoughts() {
                     className="pl-8 relative group"
                   >
                     {/* Timeline Dot */}
-                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-text-primary/20 border-2 border-bg-surface group-hover:bg-accent-primary dark:group-hover:bg-orange-400 group-hover:scale-125 transition-all duration-300" />
+                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-text-primary/20 border-2 border-bg-surface group-hover:bg-accent-primary group-hover:border-accent-primary dark:group-hover:bg-orange-400 dark:group-hover:border-orange-400 group-hover:scale-125 transition-all duration-300" />
 
                     <a
                       href={getBlueSkyUrl(post.uri)}

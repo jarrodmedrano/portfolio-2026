@@ -90,6 +90,11 @@ const config: Config = {
         'accent-primary-dim': 'var(--accent-primary-dim)',
         'accent-primary-glow': 'var(--accent-primary-glow)',
 
+        // Alias for backwards compatibility
+        'accent-gold': 'var(--accent-primary)',
+        'accent-gold-dim': 'var(--accent-primary-dim)',
+        'accent-gold-glow': 'var(--accent-primary-glow)',
+
         'border-subtle': 'var(--border-subtle)',
 
         // Legacy support
