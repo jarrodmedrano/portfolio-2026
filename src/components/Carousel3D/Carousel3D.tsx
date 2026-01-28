@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client';
 
 import {
@@ -15,11 +13,34 @@ import CarouselControls from './CarouselControls';
 import CarouselIndicators from './CarouselIndicators';
 import styles from './Carousel3D.module.css';
 
+/**
+ * Props for the Carousel3D component
+ */
 interface Carousel3DProps {
+  /** Array of carousel items (projects or CTA cards) */
   items: CarouselItem[];
+  /** Auto-rotation interval in milliseconds (default: 5000ms) */
   autoPlayInterval?: number;
 }
 
+/**
+ * 3D horizontal carousel component with golden rectangle active state
+ *
+ * Features:
+ * - 3D rotation with 72° spacing between cards
+ * - Golden rectangle morph (720×445px active, 400×400px inactive)
+ * - Auto-rotation with pause-on-hover
+ * - Full keyboard navigation (arrows, space, home/end)
+ * - Touch swipe support
+ * - Screen reader announcements
+ * - Reduced motion support
+ * - Responsive design (mobile/tablet/desktop)
+ *
+ * @example
+ * ```tsx
+ * <Carousel3D items={carouselItems} autoPlayInterval={5000} />
+ * ```
+ */
 export default function Carousel3D({
   items,
   autoPlayInterval = 5000,
@@ -28,25 +49,21 @@ export default function Carousel3D({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(!prefersReducedMotion);
   const [isPausedByHover, setIsPausedByHover] = useState(false);
-  const [direction, setDirection] = useState<'left' | 'right'>('right');
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const { announcement } = useAccessibility({ activeIndex, items });
 
   const navigateNext = useCallback(() => {
-    setDirection('right');
     setActiveIndex((prev) => (prev + 1) % items.length);
   }, [items.length]);
 
   const navigatePrev = useCallback(() => {
-    setDirection('left');
     setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
   }, [items.length]);
 
   const navigateToIndex = useCallback((index: number) => {
-    setDirection(index > activeIndex ? 'right' : 'left');
     setActiveIndex(index);
-  }, [activeIndex]);
+  }, []);
 
   const toggleAutoPlay = useCallback(() => {
     setIsAutoPlaying((prev) => !prev);
@@ -83,7 +100,7 @@ export default function Carousel3D({
   // Memoize transform calculations to prevent recalculating on every render
   const cardTransforms = useMemo(
     () => items.map((_, index) => getCardTransform(index, activeIndex, items.length)),
-    [activeIndex, items.length],
+    [activeIndex, items],
   );
 
   useEffect(() => {

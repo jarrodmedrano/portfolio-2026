@@ -1,5 +1,26 @@
 import type { CardTransform } from '@/types/carousel';
 
+/**
+ * Calculates the 3D transform properties for a card based on its position
+ * relative to the active card
+ *
+ * Positions cards in a circular arrangement with:
+ * - 72° rotation per position (360° / 5 cards)
+ * - Scale: 1.0 (active), 0.7 (adjacent), 0.5 (distant)
+ * - Opacity: 1.0 (active), 0.7 (adjacent), 0.4 (distant)
+ * - Z-index based on distance from active
+ *
+ * @param cardIndex - Index of the card being positioned
+ * @param activeIndex - Index of the currently active card
+ * @param totalCards - Total number of cards in the carousel
+ * @returns Transform properties for the card (rotation, scale, opacity, z-index, etc.)
+ *
+ * @example
+ * ```ts
+ * const transform = getCardTransform(1, 0, 5);
+ * // Returns: { rotateY: 72, scale: 0.7, opacity: 0.7, zIndex: 4, ... }
+ * ```
+ */
 export function getCardTransform(
   cardIndex: number,
   activeIndex: number,

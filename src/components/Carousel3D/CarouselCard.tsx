@@ -9,13 +9,27 @@ import { useResponsive } from './useResponsive';
 import { CARD_DIMENSIONS, GOLDEN_RATIO } from './constants';
 import styles from './CarouselCard.module.css';
 
+/**
+ * Props for the CarouselCard component
+ */
 interface CarouselCardProps {
+  /** Carousel item to display (project or CTA) */
   item: CarouselItem;
+  /** 3D transform properties for positioning */
   transform: CardTransform;
+  /** Whether this card is currently active */
   isActive: boolean;
+  /** Whether to use reduced motion animations */
   reducedMotion?: boolean;
 }
 
+/**
+ * Individual card component in the 3D carousel
+ *
+ * Renders either a project card with an image or a CTA card with text.
+ * Animates size changes between golden rectangle (active) and square (inactive).
+ * Memoized to prevent unnecessary re-renders.
+ */
 function CarouselCard({
   item,
   transform,

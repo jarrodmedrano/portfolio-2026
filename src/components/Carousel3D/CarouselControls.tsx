@@ -2,13 +2,28 @@
 
 import styles from './CarouselControls.module.css';
 
+/**
+ * Props for the CarouselControls component
+ */
 interface CarouselControlsProps {
+  /** Callback to navigate to previous card */
   onPrev: () => void;
+  /** Callback to navigate to next card */
   onNext: () => void;
+  /** Callback to toggle auto-rotation on/off */
   onToggleAutoPlay: () => void;
+  /** Whether auto-rotation is currently enabled */
   isAutoPlaying: boolean;
 }
 
+/**
+ * Navigation controls for the carousel
+ *
+ * Provides:
+ * - Left/right arrow buttons for manual navigation
+ * - Play/pause button for auto-rotation control
+ * - Responsive positioning (side buttons on desktop, bottom on mobile)
+ */
 export default function CarouselControls({
   onPrev,
   onNext,
