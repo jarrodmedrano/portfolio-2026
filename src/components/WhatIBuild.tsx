@@ -81,7 +81,7 @@ export default function WhatIBuild() {
 
                       <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2">
                         {service.features.map((feature) => (
-                          <div key={feature} className="flex items-center gap-2 text-sm text-text-tertiary">
+                          <div key={feature} className="flex items-center gap-2 text-sm text-text-tertiary dark:text-text-secondary">
                             <span className="w-1 h-1 rounded-full bg-accent-primary/40 dark:bg-orange-400/40" />
                             {feature}
                           </div>
@@ -89,7 +89,7 @@ export default function WhatIBuild() {
                       </div>
 
                       <div className="mt-6 pt-4 border-t border-text-primary/5">
-                        <p className="text-xs text-text-tertiary font-mono uppercase tracking-wide">
+                        <p className="text-xs text-text-tertiary dark:text-text-secondary font-mono uppercase tracking-wide">
                           Stack:
                           {' '}
                           <span className="text-text-secondary">{service.tech}</span>
@@ -129,14 +129,14 @@ export default function WhatIBuild() {
                   'Code quality assessment',
                   'Team training',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-text-tertiary">
+                  <li key={item} className="flex items-center gap-3 text-sm text-text-tertiary dark:text-text-secondary">
                     <span className="text-accent-primary dark:text-orange-400">→</span>
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <p className="text-xs text-text-tertiary italic border-t border-text-primary/5 pt-4">
+              <p className="text-xs text-text-tertiary dark:text-text-secondary italic border-t border-text-primary/5 pt-4">
                 Available for Hourly, Project-based, or Retainer engagements.
               </p>
             </motion.div>
