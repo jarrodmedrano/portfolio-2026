@@ -70,7 +70,7 @@ export default function RecentThoughts() {
           main={(
             <div className="space-y-16">
               <div className="space-y-4">
-                <span className="text-accent-primary dark:text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
+                <span className="text-accent-primary uppercase tracking-[0.2em] text-xs font-semibold">
                   Journal
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-text-primary font-display">
@@ -78,7 +78,7 @@ export default function RecentThoughts() {
                   {' '}
                   <span className="text-text-secondary">Thoughts</span>
                 </h2>
-                <div className="w-16 h-1 bg-accent-primary/20 dark:bg-orange-500/20" />
+                <div className="w-16 h-1 bg-accent-primary/20" />
               </div>
 
               <div className="relative border-l border-text-primary/10 ml-3 md:ml-6 space-y-12 pb-12">
@@ -89,7 +89,7 @@ export default function RecentThoughts() {
                 {error && (
                 <div className="pl-8">
                   <p className="text-text-tertiary mb-2">Connection unstable.</p>
-                  <a href={CONFIG.BLUESKY_PROFILE} className="text-accent-primary dark:text-orange-300 underline text-sm">View on BlueSky</a>
+                  <a href={CONFIG.BLUESKY_PROFILE} className="text-accent-primary underline text-sm">View on BlueSky</a>
                 </div>
                 )}
 
@@ -104,13 +104,13 @@ export default function RecentThoughts() {
                     className="pl-8 relative group"
                   >
                     {/* Timeline Dot */}
-                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-text-primary/20 border-2 border-bg-surface group-hover:bg-accent-primary group-hover:border-accent-primary dark:group-hover:bg-orange-400 dark:group-hover:border-orange-400 group-hover:scale-125 transition-all duration-300" />
+                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-text-primary/20 border-2 border-bg-surface group-hover:bg-accent-primary group-hover:border-accent-primary group-hover:scale-125 transition-all duration-300" />
 
                     <a
                       href={getBlueSkyUrl(post.uri)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block p-6 rounded-lg bg-bg-elevated/50 dark:bg-white/5 border border-text-primary/5 dark:border-white/5 hover:border-accent-primary/30 dark:hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1"
+                      className="block p-6 rounded-lg bg-bg-elevated/50 dark:bg-white/5 border border-text-primary/5 dark:border-white/5 hover:border-accent-primary/30 transition-all duration-300 hover:-translate-y-1"
                     >
                       <p className="text-lg text-text-secondary leading-relaxed mb-4 group-hover:text-text-primary transition-colors">
                         &ldquo;
@@ -118,9 +118,9 @@ export default function RecentThoughts() {
                         &rdquo;
                       </p>
                       <div className="flex items-center gap-2 text-xs text-text-tertiary font-mono uppercase tracking-wide">
-                        <span className="text-accent-primary dark:text-orange-400/80">{formatDate(post.createdAt)}</span>
+                        <span className="text-accent-primary">{formatDate(post.createdAt)}</span>
                         <span>•</span>
-                        <span className="group-hover:text-accent-primary dark:group-hover:text-orange-300 transition-colors">Read Context →</span>
+                        <span className="group-hover:text-accent-primary transition-colors">Read Context →</span>
                       </div>
                     </a>
                   </motion.div>
@@ -136,7 +136,7 @@ export default function RecentThoughts() {
                 >
                   Follow on BlueSky
                   {' '}
-                  <span className="text-accent-primary dark:text-orange-400">→</span>
+                  <span className="text-accent-primary">→</span>
                 </a>
               </div>
             </div>

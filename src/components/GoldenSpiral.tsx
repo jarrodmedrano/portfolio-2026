@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export default function GoldenSpiral({ className = '' }: { className?: string }) {
   return (
     <div className={`pointer-events-none ${className}`}>
-      <svg viewBox="0 0 100 100" className="w-full h-full stroke-accent-primary dark:stroke-orange-200 fill-none" strokeWidth="0.5">
+      <svg viewBox="0 0 100 100" className="w-full h-full stroke-accent-primary fill-none" strokeWidth="0.5">
         {/* Rough Golden Spiral representation */}
         <motion.path
           d="M50 50 L90 50 A40 40 0 0 1 50 90 A40 40 0 0 1 10 50 A40 40 0 0 1 50 10 A40 40 0 0 1 90 50"

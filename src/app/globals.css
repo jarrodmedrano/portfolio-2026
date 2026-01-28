@@ -90,7 +90,7 @@
   }
 
   .btn-gold {
-    @apply inline-flex items-center justify-center px-8 py-3 bg-transparent border dark:border-orange-200/20 dark:text-orange-100 rounded-sm transition-all duration-300 uppercase tracking-widest text-xs font-semibold;
+    @apply inline-flex items-center justify-center px-8 py-3 bg-transparent border rounded-sm transition-all duration-300 uppercase tracking-widest text-xs font-semibold;
     color: var(--accent-primary);
     border-color: color-mix(in srgb, var(--accent-primary), transparent 60%);
     background: linear-gradient(45deg, transparent 50%, var(--accent-primary-glow) 100%);
@@ -105,7 +105,7 @@
   }
 
   .dark .btn-gold:hover {
-    border-color: #fb923c; /* orange-400 */
+    border-color: var(--accent-primary);
     color: #ffffff;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
   }

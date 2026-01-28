@@ -26,7 +26,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={cycleTheme}
-      className="relative flex items-center justify-center w-9 h-9 rounded-md transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-accent-primary dark:hover:text-orange-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary dark:focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-deep"
+      className="relative flex items-center justify-center w-9 h-9 rounded-md transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-bg-deep"
       aria-label="Toggle theme"
       title={`Current theme: ${theme}`}
     >

@@ -70,7 +70,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Content Stack */}
         <div className="flex-1 flex flex-col space-y-3">
           {/* Client/Type Label */}
-          <p className="text-xs uppercase tracking-[0.2em] text-accent-primary dark:text-orange-200/60 font-medium">
+          <p className="text-xs uppercase tracking-[0.2em] text-accent-primary font-medium">
             {project.clientType}
           </p>
 
@@ -105,7 +105,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent-primary dark:text-orange-200 hover:text-text-primary dark:hover:text-white transition-colors flex items-center gap-1 group/link"
+                className="text-accent-primary hover:text-text-primary dark:hover:text-white transition-colors flex items-center gap-1 group/link"
               >
                 View Live
                 <span className="group-hover/link:translate-x-0.5 transition-transform">→</span>
