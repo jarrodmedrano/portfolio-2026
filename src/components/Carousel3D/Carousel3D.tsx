@@ -8,6 +8,7 @@ import {
 import type { CarouselItem } from '@/types/carousel';
 import { getCardTransform } from './utils';
 import { useAccessibility } from './useAccessibility';
+import { useReducedMotion } from './useReducedMotion';
 import CarouselCard from './CarouselCard';
 import CarouselControls from './CarouselControls';
 import CarouselIndicators from './CarouselIndicators';
@@ -22,8 +23,9 @@ export default function Carousel3D({
   items,
   autoPlayInterval = 5000,
 }: Carousel3DProps) {
+  const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(!prefersReducedMotion);
   const [isPausedByHover, setIsPausedByHover] = useState(false);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -133,6 +135,7 @@ export default function Carousel3D({
               item={item}
               transform={transform}
               isActive={transform.isGoldenRect}
+              reducedMotion={prefersReducedMotion}
             />
           );
         })}

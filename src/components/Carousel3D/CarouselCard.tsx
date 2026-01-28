@@ -10,12 +10,14 @@ interface CarouselCardProps {
   item: CarouselItem;
   transform: CardTransform;
   isActive: boolean;
+  reducedMotion?: boolean;
 }
 
 export default function CarouselCard({
   item,
   transform,
   isActive,
+  reducedMotion = false,
 }: CarouselCardProps) {
   const width = transform.isGoldenRect ? 720 : 400;
   const height = transform.isGoldenRect ? 445 : 400;
@@ -35,7 +37,7 @@ export default function CarouselCard({
           height,
         }}
         transition={{
-          duration: 0.8,
+          duration: reducedMotion ? 0.1 : 0.8,
           ease: [0.4, 0, 0.2, 1],
         }}
         style={{
