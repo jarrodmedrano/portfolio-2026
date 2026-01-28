@@ -14,6 +14,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   title: {
     default: 'Jarrod Medrano | Senior Front End Engineer',
     template: '%s | Jarrod Medrano',
