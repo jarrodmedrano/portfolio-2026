@@ -5,6 +5,7 @@
 import {
   useState, useEffect, useCallback, useRef,
 } from 'react';
+import { motion } from 'framer-motion';
 import type { CarouselItem } from '@/types/carousel';
 import { getCardTransform } from './utils';
 import { useAccessibility } from './useAccessibility';
@@ -58,6 +59,26 @@ export default function Carousel3D({
   const handleMouseLeave = useCallback(() => {
     setIsPausedByHover(false);
   }, []);
+
+  const handleDragEnd = useCallback((
+    _e: MouseEvent | TouchEvent | PointerEvent,
+    info: { offset: { x: number; y: number }; velocity: { x: number; y: number } },
+  ) => {
+    const { offset, velocity } = info;
+    const swipeThreshold = 50;
+    const velocityThreshold = 500;
+
+    if (
+      Math.abs(offset.x) > swipeThreshold
+      || Math.abs(velocity.x) > velocityThreshold
+    ) {
+      if (offset.x > 0) {
+        navigatePrev();
+      } else {
+        navigateNext();
+      }
+    }
+  }, [navigateNext, navigatePrev]);
 
   useEffect(() => {
     if (!isAutoPlaying || isPausedByHover) {
@@ -126,7 +147,13 @@ export default function Carousel3D({
         {announcement}
       </div>
 
-      <div className={styles.stage}>
+      <motion.div
+        className={styles.stage}
+        drag="x"
+        dragConstraints={{ left: -100, right: 100 }}
+        dragElastic={0.2}
+        onDragEnd={handleDragEnd}
+      >
         {items.map((item, index) => {
           const transform = getCardTransform(index, activeIndex, items.length);
           return (
@@ -139,7 +166,7 @@ export default function Carousel3D({
             />
           );
         })}
-      </div>
+      </motion.div>
       <CarouselControls
         onPrev={navigatePrev}
         onNext={navigateNext}
