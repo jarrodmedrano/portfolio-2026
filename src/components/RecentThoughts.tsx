@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/animations';
+import GoldenGrid from './GoldenGrid';
 
 interface Post {
   uri: string;
@@ -60,73 +61,87 @@ export default function RecentThoughts() {
   };
 
   return (
-    <section id="thoughts" className="py-24 px-6 bg-white">
-      <div className="container mx-auto max-w-4xl">
-        <div className="mb-16">
-          <h2 className="text-4xl font-bold text-black mb-4">
-            Recent Thoughts
-          </h2>
-          <div className="w-full h-px bg-black" aria-hidden="true" />
-        </div>
+    <section id="thoughts" className="py-32 relative bg-[#121214]">
+      {/* Subtle top border */}
+      <div className="absolute top-0 left-0 w-full h-px bg-white/5" />
 
-        {loading && (
-          <p className="text-gray-600 text-center">Loading posts...</p>
-        )}
-
-        {error && (
-          <div className="text-center">
-            <p className="text-gray-600 mb-4">
-              Unable to load posts at this time.
-            </p>
-            <a
-              href={CONFIG.BLUESKY_PROFILE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-black underline hover:text-gray-700"
-            >
-              Follow me on BlueSky →
-            </a>
-          </div>
-        )}
-
-        {!loading && !error && posts.length > 0 && (
-          <div className="space-y-4">
-            {posts.map((post, index) => (
-              <motion.a
-                key={post.uri}
-                href={getBlueSkyUrl(post.uri)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block border border-gray-200 p-6 transition-colors hover:border-gray-400 cursor-pointer"
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true, margin: '-100px' }}
-                variants={fadeInUp}
-                transition={{ delay: index * 0.1 }}
-              >
-                <p className="text-base text-gray-900 leading-relaxed mb-3">
-                  {post.text}
-                </p>
-                <p className="text-sm text-gray-500">
-                  {formatDate(post.createdAt)}
+      <div className="golden-container">
+        <GoldenGrid
+          main={(
+            <div className="space-y-16">
+              <div className="space-y-4">
+                <span className="text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
+                  Journal
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold text-white font-display">
+                  Recent
                   {' '}
-                  • View on BlueSky →
-                </p>
-              </motion.a>
-            ))}
+                  <span className="text-gray-600">Thoughts</span>
+                </h2>
+                <div className="w-16 h-1 bg-orange-500/20" />
+              </div>
 
-            <div className="text-center mt-8">
-              <a
-                href={CONFIG.BLUESKY_PROFILE}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-black underline hover:text-gray-700"
-              >
-                Follow me on BlueSky →
-              </a>
+              <div className="relative border-l border-white/10 ml-3 md:ml-6 space-y-12 pb-12">
+                {loading && (
+                <p className="text-gray-500 pl-8">Accessing stream...</p>
+                )}
+
+                {error && (
+                <div className="pl-8">
+                  <p className="text-gray-500 mb-2">Connection unstable.</p>
+                  <a href={CONFIG.BLUESKY_PROFILE} className="text-orange-300 underline text-sm">View on BlueSky</a>
+                </div>
+                )}
+
+                {!loading && !error && posts.map((post, index) => (
+                  <motion.div
+                    key={post.uri}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: true, margin: '-100px' }}
+                    variants={fadeInUp}
+                    transition={{ delay: index * 0.1 }}
+                    className="pl-8 relative group"
+                  >
+                    {/* Timeline Dot */}
+                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-white/20 border-2 border-[#121214] group-hover:bg-orange-400 group-hover:scale-125 transition-all duration-300" />
+
+                    <a
+                      href={getBlueSkyUrl(post.uri)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-6 rounded-lg bg-white/5 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1"
+                    >
+                      <p className="text-lg text-gray-300 leading-relaxed mb-4 group-hover:text-white transition-colors">
+                        &ldquo;
+                        {post.text}
+                        &rdquo;
+                      </p>
+                      <div className="flex items-center gap-2 text-xs text-gray-500 font-mono uppercase tracking-wide">
+                        <span className="text-orange-400/80">{formatDate(post.createdAt)}</span>
+                        <span>•</span>
+                        <span className="group-hover:text-orange-300 transition-colors">Read Context →</span>
+                      </div>
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="text-center md:text-left md:pl-14">
+                <a
+                  href={CONFIG.BLUESKY_PROFILE}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors uppercase tracking-widest font-semibold"
+                >
+                  Follow on BlueSky
+                  {' '}
+                  <span className="text-orange-400">→</span>
+                </a>
+              </div>
             </div>
-          </div>
-        )}
+              )}
+        />
       </div>
     </section>
   );

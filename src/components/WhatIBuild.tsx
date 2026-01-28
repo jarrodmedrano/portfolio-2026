@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/animations';
+import GoldenGrid from './GoldenGrid';
 
 export default function WhatIBuild() {
   const services = [
@@ -17,7 +18,7 @@ export default function WhatIBuild() {
         'Deployment & hosting setup',
         'Foundation for future scaling',
       ],
-      tech: 'Built with: Next.js, TypeScript, Prisma, PostgreSQL',
+      tech: 'Next.js, TypeScript, Prisma, PostgreSQL',
     },
     {
       title: 'Production Applications',
@@ -26,108 +27,121 @@ export default function WhatIBuild() {
         'Full-featured web applications for growing businesses. Database design, API architecture, testing, monitoring, and ongoing maintenance.',
       features: [
         'Complex business logic & workflows',
-        'Multi-user systems with role-based access',
+        'Multi-user systems',
         'Performance optimization',
         'Data migration & modernization',
         'Security best practices',
       ],
-      tech: 'Built with: React, Node.js, GraphQL, AWS, Docker',
+      tech: 'React, Node.js, GraphQL, AWS, Docker',
     },
   ];
 
   return (
-    <section id="capabilities" className="py-24 px-6 bg-white">
-      <div className="container mx-auto max-w-6xl">
-        <div className="mb-16">
-          <h2 className="text-4xl font-bold text-black mb-4">What I Build</h2>
-          <div className="w-full h-px bg-black" />
-        </div>
+    <section id="capabilities" className="py-24 relative bg-[#0f0f11]">
+      <div className="golden-container">
 
-        {/* Two column services */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          {services.map((service, index) => (
+        <GoldenGrid
+          className="items-start"
+          main={(
+            <div className="space-y-16">
+              {/* Section Header */}
+              <div className="space-y-4">
+                <span className="text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
+                  Capabilities
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold text-white font-display">
+                  What I
+                  {' '}
+                  <span className="text-gray-600">Build</span>
+                </h2>
+                <div className="w-16 h-1 bg-orange-500/20" />
+              </div>
+
+              <div className="grid gap-12">
+                {services.map((service, index) => (
+                  <motion.div
+                    key={service.title}
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: true, margin: '-100px' }}
+                    variants={fadeInUp}
+                    transition={{ delay: index * 0.1 }}
+                    className="group"
+                  >
+                    <div className="border-l-2 border-white/10 pl-6 group-hover:border-orange-400/50 transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-white mb-2 font-display">
+                        {service.title}
+                      </h3>
+                      <p className="text-lg font-medium text-orange-200/80 mb-4">
+                        {service.tagline}
+                      </p>
+                      <p className="text-gray-400 leading-relaxed max-w-2xl mb-6">
+                        {service.description}
+                      </p>
+
+                      <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2">
+                        {service.features.map((feature) => (
+                          <div key={feature} className="flex items-center gap-2 text-sm text-gray-500">
+                            <span className="w-1 h-1 rounded-full bg-orange-400/40" />
+                            {feature}
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-white/5">
+                        <p className="text-xs text-gray-600 font-mono uppercase tracking-wide">
+                          Stack:
+                          {' '}
+                          <span className="text-gray-400">{service.tech}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+              )}
+          sidebar={(
             <motion.div
-              key={service.title}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true, margin: '-100px' }}
               variants={fadeInUp}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: 0.2 }}
+              className="mt-12 lg:mt-0 p-8 rounded-lg bg-white/5 border border-white/5 relative overflow-hidden"
             >
-              <div className="border-b border-black pb-2 mb-4">
-                <h3 className="text-2xl font-semibold text-black">
-                  {service.title}
-                </h3>
-              </div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
-              <p className="text-lg font-medium text-black mb-4">
-                {service.tagline}
+              <h3 className="text-xl font-bold text-white mb-6 font-display">
+                Technical Consulting
+              </h3>
+
+              <p className="text-base text-gray-300 mb-6 leading-relaxed">
+                Expert guidance when you need it. Code reviews, architecture planning,
+                and team mentorship.
               </p>
 
-              <p className="text-base text-gray-700 leading-normal mb-4">
-                {service.description}
-              </p>
-
-              <ul className="space-y-2 mb-4">
-                {service.features.map((feature) => (
-                  <li key={feature} className="text-base text-gray-700">
-                    •
-                    {' '}
-                    {feature}
+              <ul className="space-y-3 mb-8">
+                {[
+                  'Architecture & system design',
+                  'Performance & security audits',
+                  'Tech migration planning',
+                  'Code quality assessment',
+                  'Team training',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-gray-400">
+                    <span className="text-orange-400 mt-1">→</span>
+                    {item}
                   </li>
                 ))}
               </ul>
 
-              <p className="text-sm text-gray-600 italic">{service.tech}</p>
+              <p className="text-xs text-gray-500 italic border-t border-white/5 pt-4">
+                Available for Hourly, Project-based, or Retainer engagements.
+              </p>
             </motion.div>
-          ))}
-        </div>
-
-        {/* Full width consulting */}
-        <motion.div
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={fadeInUp}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="border-b border-black pb-2 mb-4">
-            <h3 className="text-2xl font-semibold text-black">
-              Technical Consulting
-            </h3>
-          </div>
-
-          <p className="text-lg font-medium text-black mb-4">
-            Expert guidance when you need it.
-          </p>
-
-          <p className="text-base text-gray-700 leading-normal mb-4">
-            Code reviews, architecture planning, technical debt assessment,
-            performance audits, and team mentorship.
-          </p>
-
-          <ul className="grid md:grid-cols-2 gap-2 mb-4">
-            <li className="text-base text-gray-700">
-              • Architecture & system design reviews
-            </li>
-            <li className="text-base text-gray-700">
-              • Performance & security audits
-            </li>
-            <li className="text-base text-gray-700">
-              • Technology selection & migration planning
-            </li>
-            <li className="text-base text-gray-700">
-              • Code quality assessment
-            </li>
-            <li className="text-base text-gray-700">
-              • Team training & best practices
-            </li>
-          </ul>
-
-          <p className="text-sm text-gray-600 italic">
-            Engagement types: Hourly, project-based, or retainer
-          </p>
-        </motion.div>
+              )}
+        />
       </div>
     </section>
   );
