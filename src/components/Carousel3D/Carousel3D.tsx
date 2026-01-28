@@ -7,6 +7,7 @@ import {
 } from 'react';
 import type { CarouselItem } from '@/types/carousel';
 import { getCardTransform } from './utils';
+import { useAccessibility } from './useAccessibility';
 import CarouselCard from './CarouselCard';
 import CarouselControls from './CarouselControls';
 import CarouselIndicators from './CarouselIndicators';
@@ -26,6 +27,8 @@ export default function Carousel3D({
   const [isPausedByHover, setIsPausedByHover] = useState(false);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const { announcement } = useAccessibility({ activeIndex, items });
 
   const navigateNext = useCallback(() => {
     setDirection('right');
@@ -108,7 +111,19 @@ export default function Carousel3D({
       className={styles.container}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      role="region"
+      aria-label="Featured Projects Carousel"
+      aria-roledescription="carousel"
     >
+      {/* Live region for announcements */}
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className={styles.srOnly}
+      >
+        {announcement}
+      </div>
+
       <div className={styles.stage}>
         {items.map((item, index) => {
           const transform = getCardTransform(index, activeIndex, items.length);
