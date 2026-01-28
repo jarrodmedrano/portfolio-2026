@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import GoldenGrid from './GoldenGrid';
 import GoldenSpiral from './GoldenSpiral';
+import LiquidButton from './LiquidButton';
 
 export default function Hero() {
   const scrollToSection = (id: string) => {
@@ -27,7 +28,7 @@ export default function Hero() {
     >
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/5 to-transparent dark:from-[#ffffff05] dark:to-transparent pointer-events-none" />
-      <GoldenSpiral className="absolute right-[-10%] top-[-10%] w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] opacity-100 dark:opacity-100" />
+      <GoldenSpiral className="absolute right-[-10%] top-[-10%] w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] opacity-30 dark:opacity-100" />
 
       <GoldenGrid
         className="w-full golden-container"
@@ -39,17 +40,17 @@ export default function Hero() {
             animate="animate"
           >
             <motion.div variants={fadeInUp} className="space-y-2">
-              <span className="text-accent-gold dark:text-orange-300/80 uppercase tracking-[0.2em] text-sm font-medium">
+              <span className="text-gradient-gold dark:text-orange-300/80 uppercase tracking-[0.2em] text-sm font-medium">
                 Portfolio 2026
               </span>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter">
                 <span className="block text-text-primary">Jarrod</span>
-                <span className="block text-text-tertiary">Medrano</span>
+                <span className="block text-text-secondary dark:text-text-tertiary">Medrano</span>
               </h1>
             </motion.div>
 
             <motion.p
-              className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-lg border-l-2 border-orange-500/20 pl-6"
+              className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-lg border-l-2 border-accent-gold/30 dark:border-orange-500/20 pl-6"
               variants={fadeInUp}
             >
               Senior Software Engineer crafting
@@ -64,13 +65,12 @@ export default function Hero() {
               className="flex flex-col sm:flex-row items-center gap-6 pt-4"
               variants={fadeInUp}
             >
-              <button
+              <LiquidButton
                 type="button"
                 onClick={() => scrollToSection('work')}
-                className="btn-gold"
               >
                 View Work
-              </button>
+              </LiquidButton>
               <button
                 type="button"
                 onClick={() => scrollToSection('contact')}
@@ -90,9 +90,9 @@ export default function Hero() {
               transition={{ delay: 0.4, duration: 1 }}
               className="relative w-full aspect-square max-w-md"
             >
-              <div className="absolute inset-0 border border-text-primary/20 dark:border-text-primary/5 rounded-full" />
-              <div className="absolute inset-4 border border-text-primary/20 dark:border-text-primary/5 rounded-full opacity-60" />
-              <div className="absolute inset-12 border border-text-primary/20 dark:border-text-primary/5 rounded-full opacity-30" />
+              <div className="absolute inset-0 border border-text-primary rounded-full opacity-20 dark:opacity-5" />
+              <div className="absolute inset-4 border border-text-primary rounded-full opacity-10 dark:opacity-5" />
+              <div className="absolute inset-12 border border-text-primary rounded-full opacity-5" />
 
               {/* Abstract content or perhaps a profile image later */}
               <div className="absolute inset-0 flex items-center justify-center">

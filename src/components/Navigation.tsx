@@ -74,7 +74,7 @@ export default function Navigation() {
         <button
           type="button"
           onClick={() => scrollToSection('hero')}
-          className="text-xl font-bold font-display tracking-tight text-neutral-900 dark:text-white hover:text-orange-500 dark:hover:text-orange-200 transition-colors"
+          className="text-xl font-bold font-display tracking-tight text-neutral-900 dark:text-white hover:text-accent-gold dark:hover:text-orange-200 transition-colors"
         >
           JM
         </button>
@@ -86,9 +86,9 @@ export default function Navigation() {
                 key={item.id}
                 type="button"
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm tracking-wide uppercase transition-all hover:text-orange-500 dark:hover:text-orange-200 relative ${
+                className={`text-sm tracking-wide uppercase transition-all hover:text-accent-gold dark:hover:text-orange-200 relative ${
                   activeSection === item.id
-                    ? 'text-neutral-900 dark:text-white after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[1px] after:bg-orange-500/50 dark:after:bg-orange-400/50'
+                    ? 'text-neutral-900 dark:text-white after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[1px] after:bg-accent-gold/50 dark:after:bg-orange-400/50'
                     : 'text-neutral-500 dark:text-gray-400'
                 }`}
               >

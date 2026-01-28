@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/animations';
 import GoldenGrid from './GoldenGrid';
+import LiquidButton from './LiquidButton';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -25,6 +26,10 @@ export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<
   'idle' | 'loading' | 'success' | 'error'
   >('idle');
+
+  const isSubmitting = submitStatus === 'loading';
+  const isSuccess = submitStatus === 'success';
+  const isError = submitStatus === 'error';
 
   const {
     register,
@@ -63,7 +68,7 @@ export default function ContactForm() {
   return (
     <section id="contact" className="py-32 relative bg-bg-deep overflow-hidden">
       {/* Decorative glowing orb */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent-gold/5 dark:bg-orange-500/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
       <div className="golden-container relative z-10">
         <GoldenGrid
@@ -78,7 +83,7 @@ export default function ContactForm() {
                   {' '}
                   <span className="text-text-secondary">Conversation</span>
                 </h2>
-                <div className="w-16 h-1 bg-orange-500/20" />
+                <div className="w-16 h-1 bg-accent-gold/20 dark:bg-orange-500/20" />
               </div>
 
               <motion.form
@@ -96,11 +101,11 @@ export default function ContactForm() {
                       type="text"
                       id="name"
                       placeholder=" "
-                      className={`peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary placeholder-transparent focus:outline-none focus:border-orange-400/80 transition-colors ${errors.name ? 'border-red-500' : ''}`}
+                      className={`peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary placeholder-transparent focus:outline-none focus:border-accent-gold/80 dark:focus:border-orange-400/80 transition-colors ${errors.name ? 'border-red-500' : ''}`}
                     />
                     <label
                       htmlFor="name"
-                      className="absolute left-0 top-3 text-text-tertiary text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-orange-400 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-text-tertiary cursor-text"
+                      className="absolute left-0 top-3 text-text-tertiary text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-accent-gold dark:peer-focus:text-orange-400 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-text-tertiary cursor-text"
                     >
                       Name
                     </label>
@@ -113,11 +118,11 @@ export default function ContactForm() {
                       type="email"
                       id="email"
                       placeholder=" "
-                      className={`peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary placeholder-transparent focus:outline-none focus:border-orange-400/80 transition-colors ${errors.email ? 'border-red-500' : ''}`}
+                      className={`peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary placeholder-transparent focus:outline-none focus:border-accent-gold/80 dark:focus:border-orange-400/80 transition-colors ${errors.email ? 'border-red-500' : ''}`}
                     />
                     <label
                       htmlFor="email"
-                      className="absolute left-0 top-3 text-text-tertiary text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-orange-400 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-text-tertiary cursor-text"
+                      className="absolute left-0 top-3 text-text-tertiary text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-accent-gold dark:peer-focus:text-orange-400 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-text-tertiary cursor-text"
                     >
                       Email
                     </label>
@@ -130,7 +135,7 @@ export default function ContactForm() {
                     <select
                       {...register('projectType')}
                       id="projectType"
-                      className="peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary focus:outline-none focus:border-orange-400/80 transition-colors appearance-none"
+                      className="peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary focus:outline-none focus:border-accent-gold/80 dark:focus:border-orange-400/80 transition-colors appearance-none"
                     >
                       <option value="" className="bg-bg-elevated text-text-tertiary">Select Type</option>
                       <option value="mvp" className="bg-bg-elevated">MVP Development</option>
@@ -146,7 +151,7 @@ export default function ContactForm() {
                     <select
                       {...register('budget')}
                       id="budget"
-                      className="peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary focus:outline-none focus:border-orange-400/80 transition-colors appearance-none"
+                      className="peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary focus:outline-none focus:border-accent-gold/80 dark:focus:border-orange-400/80 transition-colors appearance-none"
                     >
                       <option value="" className="bg-bg-elevated text-text-tertiary">Select Range</option>
                       <option value="<10k" className="bg-bg-elevated">&lt;$10k</option>
@@ -165,11 +170,11 @@ export default function ContactForm() {
                     id="message"
                     rows={4}
                     placeholder=" "
-                    className={`peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary placeholder-transparent focus:outline-none focus:border-orange-400/80 transition-colors resize-none ${errors.message ? 'border-red-500' : ''}`}
+                    className={`peer w-full bg-transparent border-b border-text-primary/20 py-3 text-text-primary placeholder-transparent focus:outline-none focus:border-accent-gold/80 dark:focus:border-orange-400/80 transition-colors resize-none ${errors.message ? 'border-red-500' : ''}`}
                   />
                   <label
                     htmlFor="message"
-                    className="absolute left-0 top-3 text-text-tertiary text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-orange-400 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-text-tertiary cursor-text"
+                    className="absolute left-0 top-3 text-text-tertiary text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-accent-gold dark:peer-focus:text-orange-400 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-text-tertiary cursor-text"
                   >
                     Tell me about your project...
                   </label>
@@ -186,21 +191,28 @@ export default function ContactForm() {
                   autoComplete="off"
                 />
 
-                <button
+                <LiquidButton
                   type="submit"
-                  disabled={submitStatus === 'loading'}
-                  className="btn-gold w-full md:w-auto"
+                  disabled={isSubmitting}
+                  className="w-full md:w-auto relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed group"
                 >
-                  {submitStatus === 'loading' ? 'Encrypting & Sending...' : 'Send Transmission'}
-                </button>
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-text-primary border-t-transparent rounded-full animate-spin" />
+                      Sending...
+                    </span>
+                  ) : (
+                    'Send Transmission'
+                  )}
+                </LiquidButton>
 
                 {/* Status Messages */}
-                {submitStatus === 'success' && (
+                {isSuccess && (
                 <p className="text-sm text-green-400 font-medium animate-pulse">
                   Message received. Stand by for response.
                 </p>
                 )}
-                {submitStatus === 'error' && (
+                {isError && (
                 <p className="text-sm text-red-400 font-medium">
                   Transmission failed. Please attempt direct contact.
                 </p>
@@ -242,7 +254,7 @@ export default function ContactForm() {
                     href="mailto:jarrod@jarrodmedrano.com"
                     className="text-text-secondary hover:text-text-primary transition-colors hover:translate-x-1 duration-300 flex items-center gap-2"
                   >
-                    <span className="w-1 h-1 bg-orange-500 rounded-full" />
+                    <span className="w-1 h-1 bg-accent-gold dark:bg-orange-500 rounded-full" />
                     jarrod@jarrodmedrano.com
                   </a>
                   <a
@@ -251,7 +263,7 @@ export default function ContactForm() {
                     rel="noopener noreferrer"
                     className="text-text-secondary hover:text-text-primary transition-colors hover:translate-x-1 duration-300 flex items-center gap-2"
                   >
-                    <span className="w-1 h-1 bg-orange-500 rounded-full" />
+                    <span className="w-1 h-1 bg-accent-gold dark:bg-orange-500 rounded-full" />
                     GitHub
                   </a>
                   <a
@@ -260,7 +272,7 @@ export default function ContactForm() {
                     rel="noopener noreferrer"
                     className="text-text-secondary hover:text-text-primary transition-colors hover:translate-x-1 duration-300 flex items-center gap-2"
                   >
-                    <span className="w-1 h-1 bg-orange-500 rounded-full" />
+                    <span className="w-1 h-1 bg-accent-gold dark:bg-orange-500 rounded-full" />
                     BlueSky
                   </a>
                   <a
@@ -269,7 +281,7 @@ export default function ContactForm() {
                     rel="noopener noreferrer"
                     className="text-text-secondary hover:text-text-primary transition-colors hover:translate-x-1 duration-300 flex items-center gap-2"
                   >
-                    <span className="w-1 h-1 bg-orange-500 rounded-full" />
+                    <span className="w-1 h-1 bg-accent-gold dark:bg-orange-500 rounded-full" />
                     LinkedIn
                   </a>
                 </div>

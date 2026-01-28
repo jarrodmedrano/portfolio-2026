@@ -78,7 +78,7 @@ export default function RecentThoughts() {
                   {' '}
                   <span className="text-text-secondary">Thoughts</span>
                 </h2>
-                <div className="w-16 h-1 bg-orange-500/20" />
+                <div className="w-16 h-1 bg-accent-gold/20 dark:bg-orange-500/20" />
               </div>
 
               <div className="relative border-l border-text-primary/10 ml-3 md:ml-6 space-y-12 pb-12">
@@ -104,13 +104,13 @@ export default function RecentThoughts() {
                     className="pl-8 relative group"
                   >
                     {/* Timeline Dot */}
-                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-text-primary/20 border-2 border-bg-surface group-hover:bg-orange-400 group-hover:scale-125 transition-all duration-300" />
+                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-text-primary/20 border-2 border-bg-surface group-hover:bg-accent-gold dark:group-hover:bg-orange-400 group-hover:scale-125 transition-all duration-300" />
 
                     <a
                       href={getBlueSkyUrl(post.uri)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block p-6 rounded-lg bg-bg-elevated/50 dark:bg-white/5 border border-text-primary/5 dark:border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1"
+                      className="block p-6 rounded-lg bg-bg-elevated/50 dark:bg-white/5 border border-text-primary/5 dark:border-white/5 hover:border-accent-gold/30 dark:hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1"
                     >
                       <p className="text-lg text-text-secondary leading-relaxed mb-4 group-hover:text-text-primary transition-colors">
                         &ldquo;

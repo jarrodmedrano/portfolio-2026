@@ -21,7 +21,7 @@ export default function Technologies() {
                 <h2 className="text-4xl md:text-5xl font-bold text-text-primary font-display">
                   Technologies
                 </h2>
-                <div className="w-16 h-1 bg-orange-500/20" />
+                <div className="w-16 h-1 bg-accent-gold/20 dark:bg-orange-500/20" />
               </div>
 
               <motion.div
@@ -40,7 +40,7 @@ export default function Technologies() {
                       {tech.items.map((item) => (
                         <span
                           key={item}
-                          className="px-3 py-1.5 text-xs text-text-secondary bg-bg-elevated/50 dark:bg-white/5 border border-text-primary/5 dark:border-white/5 rounded-sm hover:border-orange-500/30 hover:text-orange-600 dark:hover:text-orange-100 transition-colors"
+                          className="px-3 py-1.5 text-xs text-text-secondary bg-bg-elevated/50 dark:bg-white/5 border border-text-primary/5 dark:border-white/5 rounded-sm hover:border-accent-gold/30 dark:hover:border-orange-500/30 hover:text-accent-gold dark:hover:text-orange-100 transition-colors"
                         >
                           {item}
                         </span>

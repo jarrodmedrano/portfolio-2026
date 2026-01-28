@@ -25,7 +25,7 @@ export default function SelectedWork() {
                   <br />
                   <span className="text-text-secondary">Experiences</span>
                 </h2>
-                <div className="w-16 h-1 bg-orange-500/20" />
+                <div className="w-16 h-1 bg-accent-gold/20 dark:bg-orange-500/20" />
               </div>
 
               {/* Projects Grid */}

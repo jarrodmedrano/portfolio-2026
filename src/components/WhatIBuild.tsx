@@ -54,7 +54,7 @@ export default function WhatIBuild() {
                   {' '}
                   <span className="text-text-secondary">Build</span>
                 </h2>
-                <div className="w-16 h-1 bg-orange-500/20" />
+                <div className="w-16 h-1 bg-accent-gold/20 dark:bg-orange-500/20" />
               </div>
 
               <div className="grid gap-12">
@@ -68,7 +68,7 @@ export default function WhatIBuild() {
                     transition={{ delay: index * 0.1 }}
                     className="group"
                   >
-                    <div className="border-l-2 border-text-primary/10 pl-6 group-hover:border-orange-400/50 transition-colors duration-300">
+                    <div className="border-l-2 border-text-primary/10 pl-6 group-hover:border-accent-gold/50 dark:group-hover:border-orange-400/50 transition-colors duration-300">
                       <h3 className="text-2xl font-bold text-text-primary mb-2 font-display">
                         {service.title}
                       </h3>
@@ -82,7 +82,7 @@ export default function WhatIBuild() {
                       <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2">
                         {service.features.map((feature) => (
                           <div key={feature} className="flex items-center gap-2 text-sm text-text-tertiary">
-                            <span className="w-1 h-1 rounded-full bg-orange-400/40" />
+                            <span className="w-1 h-1 rounded-full bg-accent-gold/40 dark:bg-orange-400/40" />
                             {feature}
                           </div>
                         ))}
@@ -110,7 +110,7 @@ export default function WhatIBuild() {
               transition={{ delay: 0.2 }}
               className="mt-12 lg:mt-0 p-8 rounded-lg bg-bg-surface border border-text-primary/5 relative overflow-hidden shadow-sm dark:shadow-none"
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-24 h-24 bg-accent-gold/10 dark:bg-orange-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
               <h3 className="text-xl font-bold text-text-primary mb-6 font-display">
                 Technical Consulting
@@ -130,7 +130,7 @@ export default function WhatIBuild() {
                   'Team training',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-sm text-text-tertiary">
-                    <span className="text-orange-400">→</span>
+                    <span className="text-accent-gold dark:text-orange-400">→</span>
                     {item}
                   </li>
                 ))}
