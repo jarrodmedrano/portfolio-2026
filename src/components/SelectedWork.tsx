@@ -1,7 +1,7 @@
 'use client';
 
-import { projects } from '@/data/projects';
-import ProjectCard from './ProjectCard';
+import { carouselItems } from '@/data/projects';
+import Carousel3D from './Carousel3D';
 
 export default function SelectedWork() {
   return (
@@ -15,12 +15,8 @@ export default function SelectedWork() {
           <div className="h-px bg-black w-full" />
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-12">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        {/* Carousel */}
+        <Carousel3D items={carouselItems} autoPlayInterval={5000} />
       </div>
     </section>
   );
