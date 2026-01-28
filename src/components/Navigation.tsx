@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+import { ThemeToggle } from './ThemeToggle';
+
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -60,7 +62,9 @@ export default function Navigation() {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 h-20 px-6 transition-all duration-300 ${
-        scrolled ? 'bg-[#0a0a0c]/90 backdrop-blur-md py-4 shadow-sm shadow-black' : 'bg-transparent py-6'
+        scrolled
+          ? 'bg-white/90 dark:bg-[#0a0a0c]/90 backdrop-blur-md py-4 shadow-sm shadow-zinc-200 dark:shadow-black'
+          : 'bg-transparent py-6'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -70,26 +74,32 @@ export default function Navigation() {
         <button
           type="button"
           onClick={() => scrollToSection('hero')}
-          className="text-xl font-bold font-display tracking-tight text-white hover:text-orange-200 transition-colors"
+          className="text-xl font-bold font-display tracking-tight text-neutral-900 dark:text-white hover:text-orange-500 dark:hover:text-orange-200 transition-colors"
         >
           JM
         </button>
 
         <div className="flex items-center gap-8">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => scrollToSection(item.id)}
-              className={`text-sm tracking-wide uppercase transition-all hover:text-orange-200 relative ${
-                activeSection === item.id
-                  ? 'text-white after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[1px] after:bg-orange-400/50'
-                  : 'text-gray-400'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => scrollToSection(item.id)}
+                className={`text-sm tracking-wide uppercase transition-all hover:text-orange-500 dark:hover:text-orange-200 relative ${
+                  activeSection === item.id
+                    ? 'text-neutral-900 dark:text-white after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[1px] after:bg-orange-500/50 dark:after:bg-orange-400/50'
+                    : 'text-neutral-500 dark:text-gray-400'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="pl-4 border-l border-neutral-200 dark:border-neutral-800">
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </motion.nav>

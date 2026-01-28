@@ -36,11 +36,13 @@
       "Bash(git push:*)",
       "Bash(gh pr create:*)",
       "Bash(git checkout:*)",
-      "Bash(pnpm dev)"
+      "Bash(pnpm dev)",
+      "Bash(npm run build:*)",
+      "Bash(npx prisma generate)"
     ]
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "playwright"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

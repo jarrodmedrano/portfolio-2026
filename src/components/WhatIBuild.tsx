@@ -37,7 +37,7 @@ export default function WhatIBuild() {
   ];
 
   return (
-    <section id="capabilities" className="py-24 relative bg-[#0f0f11]">
+    <section id="capabilities" className="py-24 relative bg-bg-elevated">
       <div className="golden-container">
 
         <GoldenGrid
@@ -46,13 +46,13 @@ export default function WhatIBuild() {
             <div className="space-y-16">
               {/* Section Header */}
               <div className="space-y-4">
-                <span className="text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
+                <span className="text-accent-gold dark:text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
                   Capabilities
                 </span>
-                <h2 className="text-4xl md:text-5xl font-bold text-white font-display">
+                <h2 className="text-4xl md:text-5xl font-bold text-text-primary font-display">
                   What I
                   {' '}
-                  <span className="text-gray-600">Build</span>
+                  <span className="text-text-secondary">Build</span>
                 </h2>
                 <div className="w-16 h-1 bg-orange-500/20" />
               </div>
@@ -68,31 +68,31 @@ export default function WhatIBuild() {
                     transition={{ delay: index * 0.1 }}
                     className="group"
                   >
-                    <div className="border-l-2 border-white/10 pl-6 group-hover:border-orange-400/50 transition-colors duration-300">
-                      <h3 className="text-2xl font-bold text-white mb-2 font-display">
+                    <div className="border-l-2 border-text-primary/10 pl-6 group-hover:border-orange-400/50 transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-text-primary mb-2 font-display">
                         {service.title}
                       </h3>
-                      <p className="text-lg font-medium text-orange-200/80 mb-4">
+                      <p className="text-lg font-medium text-accent-gold dark:text-orange-200/80 mb-4">
                         {service.tagline}
                       </p>
-                      <p className="text-gray-400 leading-relaxed max-w-2xl mb-6">
+                      <p className="text-text-secondary leading-relaxed max-w-2xl mb-6">
                         {service.description}
                       </p>
 
                       <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2">
                         {service.features.map((feature) => (
-                          <div key={feature} className="flex items-center gap-2 text-sm text-gray-500">
+                          <div key={feature} className="flex items-center gap-2 text-sm text-text-tertiary">
                             <span className="w-1 h-1 rounded-full bg-orange-400/40" />
                             {feature}
                           </div>
                         ))}
                       </div>
 
-                      <div className="mt-6 pt-4 border-t border-white/5">
-                        <p className="text-xs text-gray-600 font-mono uppercase tracking-wide">
+                      <div className="mt-6 pt-4 border-t border-text-primary/5">
+                        <p className="text-xs text-text-tertiary font-mono uppercase tracking-wide">
                           Stack:
                           {' '}
-                          <span className="text-gray-400">{service.tech}</span>
+                          <span className="text-text-secondary">{service.tech}</span>
                         </p>
                       </div>
                     </div>
@@ -108,15 +108,15 @@ export default function WhatIBuild() {
               viewport={{ once: true, margin: '-100px' }}
               variants={fadeInUp}
               transition={{ delay: 0.2 }}
-              className="mt-12 lg:mt-0 p-8 rounded-lg bg-white/5 border border-white/5 relative overflow-hidden"
+              className="mt-12 lg:mt-0 p-8 rounded-lg bg-bg-surface border border-text-primary/5 relative overflow-hidden shadow-sm dark:shadow-none"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
-              <h3 className="text-xl font-bold text-white mb-6 font-display">
+              <h3 className="text-xl font-bold text-text-primary mb-6 font-display">
                 Technical Consulting
               </h3>
 
-              <p className="text-base text-gray-300 mb-6 leading-relaxed">
+              <p className="text-base text-text-secondary mb-6 leading-relaxed">
                 Expert guidance when you need it. Code reviews, architecture planning,
                 and team mentorship.
               </p>
@@ -129,14 +129,14 @@ export default function WhatIBuild() {
                   'Code quality assessment',
                   'Team training',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-gray-400">
+                  <li key={item} className="flex items-center gap-3 text-sm text-text-tertiary">
                     <span className="text-orange-400">→</span>
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <p className="text-xs text-gray-500 italic border-t border-white/5 pt-4">
+              <p className="text-xs text-text-tertiary italic border-t border-text-primary/5 pt-4">
                 Available for Hourly, Project-based, or Retainer engagements.
               </p>
             </motion.div>

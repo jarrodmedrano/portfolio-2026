@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -75,6 +76,21 @@ const config: Config = {
           900: '#171717',
           DEFAULT: '#737373',
         },
+
+        // Semantic Colors (Mapped to CSS Variables)
+        'bg-deep': 'var(--bg-deep)',
+        'bg-surface': 'var(--bg-surface)',
+        'bg-elevated': 'var(--bg-elevated)',
+
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-tertiary': 'var(--text-tertiary)',
+
+        'accent-gold': 'var(--accent-gold)',
+        'accent-gold-dim': 'var(--accent-gold-dim)',
+        'accent-gold-glow': 'var(--accent-gold-glow)',
+
+        'border-subtle': 'var(--border-subtle)',
 
         // Legacy support
         background: 'var(--background)',

@@ -7,20 +7,20 @@
   --phi: 1.618;
   --golden-gap: clamp(1rem, 2vw, 3rem);
   
-  /* "Midnight & Gold" Palette */
-  --bg-deep: #0a0a0c;       /* Almost black, hint of blue/purple */
-  --bg-surface: #121214;    /* Slightly lighter surface */
-  --bg-elevated: #1a1a1d;   /* Cards etc */
+  /* Light Mode Palette (Default) */
+  --bg-deep: #fafafa;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f4f4f5;
   
-  --text-primary: #ededed;  /* Off-white for readability */
-  --text-secondary: #a1a1aa; /* Muted gray */
-  --text-tertiary: #52525b;  /* Darker gray */
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-tertiary: #a1a1aa;
 
-  --accent-gold: #d4af37;   /* Classic Gold */
-  --accent-gold-dim: #8a7e4a; 
-  --accent-gold-glow: rgba(212, 175, 55, 0.15);
+  --accent-gold: #b08d26;   /* Slightly darker gold for contrast on white */
+  --accent-gold-dim: #cfb53b; 
+  --accent-gold-glow: rgba(212, 175, 55, 0.10);
 
-  --border-subtle: #27272a;
+  --border-subtle: #e4e4e7;
   
   /* Spacing Scale (Fibonacci-ish) */
   --space-1: 0.25rem;
@@ -33,7 +33,24 @@
   
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Outfit', var(--font-sans); /* If available, else sans */
+  --font-display: 'Outfit', var(--font-sans);
+}
+
+.dark {
+  /* "Midnight & Gold" Palette (Dark Mode) */
+  --bg-deep: #0a0a0c;
+  --bg-surface: #121214;
+  --bg-elevated: #1a1a1d;
+  
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #52525b;
+
+  --accent-gold: #d4af37;
+  --accent-gold-dim: #8a7e4a;
+  --accent-gold-glow: rgba(212, 175, 55, 0.15);
+
+  --border-subtle: #27272a;
 }
 
 @layer base {
@@ -67,13 +84,23 @@
   }
 
   .btn-gold {
-    @apply inline-flex items-center justify-center px-8 py-3 bg-transparent border border-orange-200/20 text-orange-100 rounded-sm hover:border-orange-400 hover:text-white transition-all duration-300 uppercase tracking-widest text-xs font-semibold;
+    @apply inline-flex items-center justify-center px-8 py-3 bg-transparent border dark:border-orange-200/20 dark:text-orange-100 rounded-sm transition-all duration-300 uppercase tracking-widest text-xs font-semibold;
+    color: var(--accent-gold);
+    border-color: color-mix(in srgb, var(--accent-gold), transparent 60%);
     background: linear-gradient(45deg, transparent 50%, rgba(212,175,55,0.05) 100%);
     background-size: 200% 100%;
   }
+  
   .btn-gold:hover {
     background-position: 100% 0;
     box-shadow: 0 0 20px var(--accent-gold-glow);
+    border-color: var(--accent-gold);
+    color: var(--text-primary);
+  }
+
+  .dark .btn-gold:hover {
+    border-color: #fb923c; /* orange-400 */
+    color: #ffffff;
   }
 
   .text-gradient-gold {
