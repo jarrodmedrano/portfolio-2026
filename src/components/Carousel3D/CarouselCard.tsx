@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import type { CarouselItem, CardTransform } from '@/types/carousel';
 import CardContent from './CardContent';
+import { useResponsive } from './useResponsive';
+import { CARD_DIMENSIONS, GOLDEN_RATIO } from './constants';
 import styles from './CarouselCard.module.css';
 
 interface CarouselCardProps {
@@ -19,8 +21,41 @@ export default function CarouselCard({
   isActive,
   reducedMotion = false,
 }: CarouselCardProps) {
-  const width = transform.isGoldenRect ? 720 : 400;
-  const height = transform.isGoldenRect ? 445 : 400;
+  const breakpoint = useResponsive();
+
+  // Calculate dimensions based on breakpoint
+  let width: number;
+  let height: number;
+
+  if (transform.isGoldenRect) {
+    // Golden rectangle dimensions
+    if (breakpoint === 'mobile') {
+      const { maxWidth, widthPercent } = CARD_DIMENSIONS.mobile.active;
+      width = Math.min(
+        typeof window !== 'undefined' ? window.innerWidth * widthPercent : maxWidth,
+        maxWidth,
+      );
+      height = width / GOLDEN_RATIO;
+    } else if (breakpoint === 'tablet') {
+      width = CARD_DIMENSIONS.tablet.active.width;
+      height = CARD_DIMENSIONS.tablet.active.height;
+    } else {
+      width = CARD_DIMENSIONS.desktop.active.width;
+      height = CARD_DIMENSIONS.desktop.active.height;
+    }
+  } else if (breakpoint === 'mobile') {
+    // Square dimensions - Mobile
+    width = CARD_DIMENSIONS.mobile.inactive.width;
+    height = CARD_DIMENSIONS.mobile.inactive.height;
+  } else if (breakpoint === 'tablet') {
+    // Square dimensions - Tablet
+    width = CARD_DIMENSIONS.tablet.inactive.width;
+    height = CARD_DIMENSIONS.tablet.inactive.height;
+  } else {
+    // Square dimensions - Desktop
+    width = CARD_DIMENSIONS.desktop.inactive.width;
+    height = CARD_DIMENSIONS.desktop.inactive.height;
+  }
 
   return (
     <>

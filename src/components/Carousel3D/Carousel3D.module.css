@@ -7,6 +7,19 @@
   overflow: visible;
 }
 
+@media (max-width: 1023px) {
+  .container {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    min-height: 450px;
+    overflow-x: hidden;
+  }
+}
+
 .stage {
   position: relative;
   width: 100%;
