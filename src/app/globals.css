@@ -40,7 +40,7 @@
 }
 
 .dark {
-  /* "Midnight & Gold" Palette (Dark Mode) */
+  /* "Midnight & Seafoam" Palette (Dark Mode) */
   --bg-deep: #0a0a0c;
   --bg-surface: #121214;
   --bg-elevated: #1a1a1d;
@@ -49,12 +49,12 @@
   --text-secondary: #a1a1aa;
   --text-tertiary: #52525b;
 
-  --accent-primary: #d4af37;
-  --accent-primary-dim: #8a7e4a;
-  --accent-primary-glow: rgba(212, 175, 55, 0.15);
+  --accent-primary: #2dd4bf; /* Seafoam Green (Teal-400) */
+  --accent-primary-dim: #115e59;
+  --accent-primary-glow: rgba(45, 212, 191, 0.15);
   
-  /* Gold Gradient for Dark Mode */
-  --accent-gradient: linear-gradient(135deg, #fff 0%, #d4af37 100%);
+  /* Seafoam Gradient for Dark Mode */
+  --accent-gradient: linear-gradient(135deg, #fff 0%, #2dd4bf 100%);
 
   --border-subtle: #27272a;
 }
@@ -107,7 +107,7 @@
   .dark .btn-gold:hover {
     border-color: var(--accent-primary);
     color: #ffffff;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
   }
 
   @keyframes gradient-flow {
