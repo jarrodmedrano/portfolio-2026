@@ -4,6 +4,8 @@
 
 import { useState } from 'react';
 import type { CarouselItem } from '@/types/carousel';
+import { getCardTransform } from './utils';
+import CarouselCard from './CarouselCard';
 import styles from './Carousel3D.module.css';
 
 interface Carousel3DProps {
@@ -22,8 +24,17 @@ export default function Carousel3D({
   return (
     <div className={styles.container}>
       <div className={styles.stage}>
-        {/* Cards will go here */}
-        <p className="text-center text-gray-500">Carousel cards placeholder</p>
+        {items.map((item, index) => {
+          const transform = getCardTransform(index, activeIndex, items.length);
+          return (
+            <CarouselCard
+              key={item.id}
+              item={item}
+              transform={transform}
+              isActive={transform.isGoldenRect}
+            />
+          );
+        })}
       </div>
     </div>
   );
