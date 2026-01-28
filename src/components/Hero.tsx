@@ -61,7 +61,7 @@ export default function Hero() {
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row items-start gap-6 pt-4"
+              className="flex flex-col sm:flex-row items-center gap-6 pt-4"
               variants={fadeInUp}
             >
               <button

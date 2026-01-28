@@ -49,8 +49,19 @@ export const projects: Project[] = [
     description:
       'Interactive learning platform teaching binary, hexadecimal, and other number systems through gamified quizzes. Tracks progress and awards achievements.',
     techStack: ['Next.js', 'TypeScript', 'Tailwind', 'Supabase'],
-    liveUrl: 'https://binary-quiz.example.com',
+    liveUrl: 'https://jarrodmedrano.github.io/binary-quiz/',
     codeUrl: 'https://github.com/jarrodmedrano/binary-quiz',
     imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Binary+Quiz',
+  },
+  {
+    id: 'guitar-fretboard',
+    title: 'Guitar Fretboard',
+    clientType: 'Personal Project',
+    description:
+      'Interactive guitar fretboard visualization tool for learning scales, chords, and intervals. Features customizable tunings and theory reference.',
+    techStack: ['React', 'Next.js', 'Tailwind', 'Framer Motion'],
+    liveUrl: 'https://guitar-fretboard-six.vercel.app/',
+    codeUrl: '#',
+    imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Guitar+Fretboard',
   },
 ];

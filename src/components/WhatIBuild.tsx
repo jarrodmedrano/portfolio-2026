@@ -129,8 +129,8 @@ export default function WhatIBuild() {
                   'Code quality assessment',
                   'Team training',
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-gray-400">
-                    <span className="text-orange-400 mt-1">→</span>
+                  <li key={item} className="flex items-center gap-3 text-sm text-gray-400">
+                    <span className="text-orange-400">→</span>
                     {item}
                   </li>
                 ))}

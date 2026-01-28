@@ -37,15 +37,34 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="relative z-10 p-4 space-y-4 h-full flex flex-col">
         {/* Image Container */}
         <div className="relative aspect-video w-full overflow-hidden rounded-md">
-          <Image
-            src={project.imageUrl}
-            alt={project.title}
-            width={800}
-            height={450}
-            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0 grayscale"
-          />
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300" />
+          {project.liveUrl ? (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full h-full cursor-pointer"
+            >
+              <Image
+                src={project.imageUrl}
+                alt={project.title}
+                width={800}
+                height={450}
+                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0 grayscale"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300" />
+            </a>
+          ) : (
+            <>
+              <Image
+                src={project.imageUrl}
+                alt={project.title}
+                width={800}
+                height={450}
+                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105 group-hover:grayscale-0 grayscale"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300" />
+            </>
+          )}
         </div>
 
         {/* Content Stack */}
