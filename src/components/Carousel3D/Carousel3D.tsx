@@ -2,7 +2,9 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import {
+  useState, useEffect, useCallback, useRef,
+} from 'react';
 import type { CarouselItem } from '@/types/carousel';
 import { getCardTransform } from './utils';
 import CarouselCard from './CarouselCard';
@@ -19,7 +21,9 @@ export default function Carousel3D({
 }: Carousel3DProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isPausedByHover, setIsPausedByHover] = useState(false);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const navigateNext = useCallback(() => {
     setDirection('right');
@@ -39,6 +43,34 @@ export default function Carousel3D({
   const toggleAutoPlay = useCallback(() => {
     setIsAutoPlaying((prev) => !prev);
   }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    setIsPausedByHover(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsPausedByHover(false);
+  }, []);
+
+  useEffect(() => {
+    if (!isAutoPlaying || isPausedByHover) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      return undefined;
+    }
+
+    intervalRef.current = setInterval(() => {
+      navigateNext();
+    }, autoPlayInterval);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isAutoPlaying, isPausedByHover, autoPlayInterval, navigateNext]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -70,7 +102,11 @@ export default function Carousel3D({
   }, [items.length, activeIndex, navigateNext, navigatePrev, navigateToIndex, toggleAutoPlay]);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className={styles.stage}>
         {items.map((item, index) => {
           const transform = getCardTransform(index, activeIndex, items.length);
