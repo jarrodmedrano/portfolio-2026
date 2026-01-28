@@ -16,7 +16,7 @@ export default function SelectedWork() {
             <div className="space-y-24">
               {/* Section Title */}
               <div className="space-y-4">
-                <span className="text-accent-gold dark:text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
+                <span className="text-accent-primary dark:text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
                   Selected Projects
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-text-primary font-display">
@@ -25,7 +25,7 @@ export default function SelectedWork() {
                   <br />
                   <span className="text-text-secondary">Experiences</span>
                 </h2>
-                <div className="w-16 h-1 bg-accent-gold/20 dark:bg-orange-500/20" />
+                <div className="w-16 h-1 bg-accent-primary/20 dark:bg-orange-500/20" />
               </div>
 
               {/* Projects Grid */}

@@ -28,7 +28,7 @@ export default function Hero() {
     >
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/5 to-transparent dark:from-[#ffffff05] dark:to-transparent pointer-events-none" />
-      <GoldenSpiral className="absolute right-[-10%] top-[-10%] w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] opacity-30 dark:opacity-100" />
+      <GoldenSpiral className="absolute right-[-10%] top-[-10%] w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] opacity-50 dark:opacity-70" />
 
       <GoldenGrid
         className="w-full golden-container"
@@ -50,12 +50,12 @@ export default function Hero() {
             </motion.div>
 
             <motion.p
-              className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-lg border-l-2 border-accent-gold/30 dark:border-orange-500/20 pl-6"
+              className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-lg border-l-2 border-accent-primary/30 dark:border-orange-500/20 pl-6"
               variants={fadeInUp}
             >
               Senior Software Engineer crafting
               {' '}
-              <span className="text-accent-gold dark:text-orange-200">production-ready</span>
+              <span className="text-accent-primary dark:text-orange-200">production-ready</span>
               {' '}
               web applications.
               Specializing in Next.js, React, and modern backend architectures.

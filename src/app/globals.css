@@ -16,9 +16,9 @@
   --text-secondary: #52525b;
   --text-tertiary: #a1a1aa;
 
-  --accent-gold: #6366f1;   /* Indigo for readable text/borders in light mode */
-  --accent-gold-dim: #818cf8; 
-  --accent-gold-glow: rgba(99, 102, 241, 0.15);
+  --accent-primary: #6366f1;   /* Indigo for readable text/borders in light mode */
+  --accent-primary-dim: #818cf8;
+  --accent-primary-glow: rgba(99, 102, 241, 0.15);
   
   /* Oil Slick Gradient: Cyan -> Violet -> Pink */
   --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
@@ -49,9 +49,9 @@
   --text-secondary: #a1a1aa;
   --text-tertiary: #52525b;
 
-  --accent-gold: #d4af37;
-  --accent-gold-dim: #8a7e4a;
-  --accent-gold-glow: rgba(212, 175, 55, 0.15);
+  --accent-primary: #d4af37;
+  --accent-primary-dim: #8a7e4a;
+  --accent-primary-glow: rgba(212, 175, 55, 0.15);
   
   /* Gold Gradient for Dark Mode */
   --accent-gradient: linear-gradient(135deg, #fff 0%, #d4af37 100%);
@@ -91,16 +91,16 @@
 
   .btn-gold {
     @apply inline-flex items-center justify-center px-8 py-3 bg-transparent border dark:border-orange-200/20 dark:text-orange-100 rounded-sm transition-all duration-300 uppercase tracking-widest text-xs font-semibold;
-    color: var(--accent-gold);
-    border-color: color-mix(in srgb, var(--accent-gold), transparent 60%);
-    background: linear-gradient(45deg, transparent 50%, var(--accent-gold-glow) 100%);
+    color: var(--accent-primary);
+    border-color: color-mix(in srgb, var(--accent-primary), transparent 60%);
+    background: linear-gradient(45deg, transparent 50%, var(--accent-primary-glow) 100%);
     background-size: 200% 100%;
   }
   
   .btn-gold:hover {
     background-position: 100% 0;
-    box-shadow: 0 0 20px var(--accent-gold-glow);
-    border-color: var(--accent-gold);
+    box-shadow: 0 0 20px var(--accent-primary-glow);
+    border-color: var(--accent-primary);
     color: var(--text-primary);
   }
 

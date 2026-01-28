@@ -10,16 +10,35 @@ export default function LiquidButton({ children, className = '', ...props }: Liq
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const rafIdRef = useRef<number | null>(null);
 
-  // Update logic to track mouse position relative to button
+  // Throttled mouse move handler using requestAnimationFrame
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    setCoords({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+
+    // If animation frame is already pending, skip this update
+    if (rafIdRef.current !== null) return;
+
+    rafIdRef.current = requestAnimationFrame(() => {
+      if (!buttonRef.current) return;
+      const rect = buttonRef.current.getBoundingClientRect();
+      setCoords({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+      rafIdRef.current = null;
     });
   };
+
+  // Cleanup animation frame on unmount
+  React.useEffect(
+    () => () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    },
+    [],
+  );
 
   return (
     <button
@@ -58,7 +77,7 @@ export default function LiquidButton({ children, className = '', ...props }: Liq
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none"
         style={{
-          background: `radial-gradient(circle 100px at ${coords.x}px ${coords.y}px, var(--accent-gold), transparent)`,
+          background: `radial-gradient(circle 100px at ${coords.x}px ${coords.y}px, var(--accent-primary), transparent)`,
         }}
       />
     </button>

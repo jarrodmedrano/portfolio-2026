@@ -6,81 +6,89 @@
 [Define your application's purpose and value proposition]
 
 ### Brand Personality
-**Minimalist • Professional • Clean • Elegant • Modern**
+**Modern • Dynamic • Accessible • Polished • Tech-Forward**
 
-Core aesthetic: Sophisticated black and white design with strategic, minimal use of color for emphasis and semantic meaning only.
+Core aesthetic: Clean design foundation with vibrant, contemporary color accents. Embraces modern web aesthetics while maintaining exceptional readability and accessibility in both light and dark modes.
 
-## Minimalist Design Principles
+## Modern Design Principles
 
-### The Black & White Philosophy
+### The Dual-Mode Philosophy
 
 **Foundation:**
-- Pure black (`#000000`) and pure white (`#ffffff`) form the foundation
-- Grayscale spectrum provides all necessary variation
-- Color is the exception, not the rule
+- Clean, readable typography as the cornerstone
+- Vibrant gradients and colors used intentionally for emphasis and delight
+- Both light and dark modes designed as first-class experiences
+- Accessibility is non-negotiable—text must be readable in all contexts
 
-**When to use color (sparingly):**
-1. **Critical user feedback** - Validation errors, success confirmations
-2. **Destructive actions** - Delete, remove, irreversible operations
-3. **High-priority CTAs** - When black is insufficient (rare)
+**When to use vibrant color:**
+1. **Brand expression** - Hero sections, primary CTAs, key visual moments
+2. **Interactive feedback** - Hover states, active elements, focus indicators
+3. **Visual hierarchy** - Drawing attention to important actions
+4. **Delight** - Strategic moments of visual interest without overwhelming
 
-**When NOT to use color:**
-- Decoration or theming
-- General information or tips (use gray + icons)
-- Secondary navigation
-- Borders, backgrounds, dividers
-- Standard interactive elements (buttons, links in black/white work)
+**Color with purpose:**
+- Gradients enhance key interactive elements (buttons, accents)
+- Color always respects contrast requirements (WCAG AA minimum)
+- Light mode uses vibrant accents for energy and modernity
+- Dark mode uses gold/warm accents for sophistication and elegance
 
-### Hierarchy Without Color
+### Hierarchy Through Modern Design
 
 Achieve visual hierarchy using:
-1. **Size** - Larger elements command attention
-2. **Weight** - Bold vs. regular vs. light typography
-3. **Contrast** - Black on white vs. gray on white
-4. **Space** - Generous whitespace around important elements
-5. **Position** - Top/center placement signals importance
-6. **Borders** - Black borders for emphasis, gray for separation
+1. **Contrast** - Strong text contrast in both light and dark modes
+2. **Color** - Strategic use of gradients and accent colors for emphasis
+3. **Size** - Scale draws attention to key elements
+4. **Weight** - Typography weight creates information hierarchy
+5. **Space** - Generous whitespace maintains clarity
+6. **Motion** - Subtle animations guide attention (respecting prefers-reduced-motion)
 
-### Visual Restraint Checklist
+### Accessibility-First Checklist
 
-Before adding any element, ask:
-- [ ] Can this be black, white, or gray instead of colored?
-- [ ] Can borders replace shadows?
-- [ ] Can sharp corners replace rounded ones?
-- [ ] Can typography hierarchy replace color-coding?
-- [ ] Can whitespace replace dividers?
-- [ ] Can icons replace decorative graphics?
-- [ ] Is this element absolutely necessary?
+Before implementing any design, verify:
+- [ ] Text contrast meets WCAG AA (4.5:1 minimum for normal text)
+- [ ] Interactive elements have visible focus states (3:1 minimum)
+- [ ] Color is never the sole indicator of information
+- [ ] Designs work in both light and dark modes
+- [ ] Animations respect prefers-reduced-motion
+- [ ] Touch targets meet minimum size requirements (44×44px)
+- [ ] Keyboard navigation is fully supported
 
 ## Color Palette
 
 ### Design Philosophy
-This design uses a **monochromatic black and white foundation** with restrained pops of color reserved exclusively for:
-- Critical interactive elements (primary CTAs)
-- Essential semantic feedback (success, error, warning states)
-- Strategic focus and emphasis
+This design uses a **dual-mode color system** that adapts beautifully between light and dark themes:
+- **Light mode**: Vibrant, energetic with indigo accents and "Oil Slick" gradients (cyan → violet → pink)
+- **Dark mode**: Sophisticated, elegant with gold accents and warm tones
+- **Both modes**: Exceptional text readability and contrast (WCAG AA compliance mandatory)
 
-**Rule:** If it can be black, white, or gray—it should be. Color is a tool of last resort.
+**Rule:** Color enhances the experience and creates visual interest, but accessibility and readability always come first.
 
-### Primary Colors (Black)
+### Theme-Adaptive Colors
+
+#### Light Mode Accent Colors
 ```css
---primary-50: #fafafa;   /* Near white */
---primary-100: #f5f5f5;  /* Lightest gray */
---primary-200: #e5e5e5;  /* Light gray */
---primary-300: #d4d4d4;  /* Medium-light gray */
---primary-400: #a3a3a3;  /* Medium gray */
---primary-500: #000000;  /* Pure black - base primary */
---primary-600: #000000;  /* Pure black */
---primary-700: #000000;  /* Pure black */
---primary-800: #000000;  /* Pure black */
---primary-900: #000000;  /* Pure black */
+--accent-primary: #6366f1;   /* Indigo - vibrant, modern, readable */
+--accent-gradient: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
+/* "Oil Slick" gradient: cyan → violet → pink */
 ```
 
-**Usage:**
-- Primary CTAs: Black background, white text
-- Primary headings: Black text
-- High-contrast UI elements
-- Inverted sections (black backgrounds)
+**Usage (Light Mode):**
+- Interactive elements: Indigo for links, buttons, active states
+- Visual emphasis: Oil Slick gradient for hero text, primary CTAs
+- Hover states: Vibrant accent colors for feedback
+- Must maintain 4.5:1 contrast ratio on light backgrounds
+
+#### Dark Mode Accent Colors
+```css
+--accent-primary: #d4af37;   /* Gold - warm, sophisticated, elegant */
+--accent-orange: #fb923c;    /* Orange - energy, warmth */
+```
+
+**Usage (Dark Mode):**
+- Interactive elements: Gold for links, buttons, active states
+- Hover states: Orange accent for warmth and feedback
+- Maintains elegance and sophistication in dark environments
+- Must maintain 4.5:1 contrast ratio on dark backgrounds
 
 ### Neutral Colors (Grayscale)
 ```css
@@ -100,20 +108,27 @@ This design uses a **monochromatic black and white foundation** with restrained 
 
 **Primary Palette:** Use these 13 values (white + 11 grays + black) for 95% of the interface.
 
-### Accent Color (Minimal Use)
+### Accent Colors (Modern & Vibrant)
+
+Light and dark modes use different accent colors optimized for their respective backgrounds while maintaining consistent visual weight and hierarchy across themes.
+
+**Light Mode:**
 ```css
-/* Strategic accent - use sparingly */
---accent-50: #fafafa;
---accent-100: #f5f5f5;
---accent-500: #000000;   /* Default to black unless color truly needed */
---accent-600: #000000;
---accent-900: #000000;
+--accent-primary: #6366f1;   /* Indigo - primary interactive color */
+--text-gradient: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
 ```
 
-**Usage (極 minimal):**
-- **ONLY** when black/white insufficient for critical interactions
-- Consider using black first, always
-- If color needed: One accent color sitewide (define specific hue when needed: blue, green, red)
+**Dark Mode:**
+```css
+--accent-primary: #d4af37;   /* Gold - primary interactive color */
+--accent-warm: #fb923c;      /* Orange - secondary accent */
+```
+
+**Usage:**
+- Links, buttons, and interactive elements use accent-primary
+- Gradients reserved for hero sections and primary CTAs
+- Hover states intensify accent colors
+- Always verify contrast ratios meet WCAG AA standards
 
 ### Semantic Colors (Reserved for Feedback Only)
 ```css
@@ -616,8 +631,8 @@ color: inherit;                      /* Icon inherits text color */
 - Brutalist web design (when executed well)
 
 **What to avoid:**
-- Excessive gradients
-- Unnecessary animations/micro-interactions
-- Decorative color for its own sake
-- Heavy shadows and depth
-- Overly rounded corners (unless brand-appropriate)
+- Gradients that reduce text readability
+- Animations without respecting prefers-reduced-motion
+- Color combinations that fail contrast requirements
+- Heavy shadows that create visual clutter
+- Sacrificing accessibility for visual style

@@ -86,9 +86,9 @@ const config: Config = {
         'text-secondary': 'var(--text-secondary)',
         'text-tertiary': 'var(--text-tertiary)',
 
-        'accent-gold': 'var(--accent-gold)',
-        'accent-gold-dim': 'var(--accent-gold-dim)',
-        'accent-gold-glow': 'var(--accent-gold-glow)',
+        'accent-primary': 'var(--accent-primary)',
+        'accent-primary-dim': 'var(--accent-primary-dim)',
+        'accent-primary-glow': 'var(--accent-primary-glow)',
 
         'border-subtle': 'var(--border-subtle)',
 
