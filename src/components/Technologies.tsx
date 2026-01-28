@@ -3,34 +3,55 @@
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/animations';
 import { techCategories } from '@/data/technologies';
+import GoldenGrid from './GoldenGrid';
 
 export default function Technologies() {
   return (
-    <section id="tech" className="py-24 px-6 bg-white">
-      <div className="container mx-auto max-w-6xl">
-        <div className="mb-16">
-          <h2 className="text-4xl font-bold text-black mb-4">Technologies</h2>
-          <div className="w-full h-px bg-black" aria-hidden="true" />
-        </div>
+    <section id="tech" className="py-24 relative bg-[#0a0a0c]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(212,175,55,0.03),transparent_40%)]" />
 
-        <motion.ul
-          className="space-y-4"
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={fadeInUp}
-        >
-          {techCategories.map((tech) => (
-            <li key={tech.category} className="text-base">
-              <span className="font-bold text-black">
-                {tech.category}
-                :
-              </span>
-              {' '}
-              <span className="text-gray-700">{tech.items.join(', ')}</span>
-            </li>
-          ))}
-        </motion.ul>
+      <div className="golden-container">
+        <GoldenGrid
+          main={(
+            <div className="space-y-12">
+              <div className="space-y-4">
+                <span className="text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
+                  Stack
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold text-white font-display">
+                  Technologies
+                </h2>
+                <div className="w-16 h-1 bg-orange-500/20" />
+              </div>
+
+              <motion.div
+                className="grid gap-x-8 gap-y-12 sm:grid-cols-2"
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true, margin: '-100px' }}
+                variants={fadeInUp}
+              >
+                {techCategories.map((tech) => (
+                  <div key={tech.category} className="space-y-4">
+                    <h3 className="text-lg font-bold text-white font-display border-b border-white/10 pb-2">
+                      {tech.category}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {tech.items.map((item) => (
+                        <span
+                          key={item}
+                          className="px-3 py-1.5 text-xs text-gray-300 bg-white/5 border border-white/5 rounded-sm hover:border-orange-500/30 hover:text-orange-100 transition-colors"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+             )}
+        />
       </div>
     </section>
   );

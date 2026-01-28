@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
+import { sendContactEmail } from '@/lib/sendgrid';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -44,7 +45,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Store in database
+    // Send email notification first (before database save)
+    // If this fails, user gets error and database isn't polluted
+    try {
+      await sendContactEmail({
+        name: validatedData.name,
+        email: validatedData.email,
+        projectType: validatedData.projectType,
+        message: validatedData.message,
+        budget: validatedData.budget,
+      });
+    } catch (emailError) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to send email notification:', emailError);
+      return NextResponse.json(
+        { error: 'Failed to send email notification. Please try again.' },
+        { status: 500 },
+      );
+    }
+
+    // Store in database after successful email
     await prisma.contactSubmission.create({
       data: {
         name: validatedData.name,

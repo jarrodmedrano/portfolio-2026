@@ -1,33 +1,44 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { staggerContainer } from '@/lib/animations';
 import { projects } from '@/data/projects';
 import ProjectCard from './ProjectCard';
+import GoldenGrid from './GoldenGrid';
 
 export default function SelectedWork() {
   return (
-    <section id="work" className="py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-            Selected Work
-          </h2>
-          <div className="h-px bg-black w-full" />
-        </div>
+    <section id="work" className="py-32 relative bg-black/40">
+      {/* Subtle Background Highlight */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-        {/* Projects List */}
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </motion.div>
+      <div className="golden-container">
+        <GoldenGrid
+          main={(
+            <div className="space-y-24">
+              {/* Section Title */}
+              <div className="space-y-4">
+                <span className="text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
+                  Selected Projects
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold text-white font-display">
+                  Crafting Digital
+                  {' '}
+                  <br />
+                  <span className="text-gray-600">Experiences</span>
+                </h2>
+                <div className="w-16 h-1 bg-orange-500/20" />
+              </div>
+
+              {/* Projects Grid */}
+              <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+                {projects.map((project, index) => (
+                  <div key={project.id} className={`${index % 2 === 1 ? 'md:translate-y-16' : ''}`}>
+                    <ProjectCard project={project} />
+                  </div>
+                ))}
+              </div>
+            </div>
+             )}
+        />
       </div>
     </section>
   );

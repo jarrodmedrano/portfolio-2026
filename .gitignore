@@ -42,3 +42,5 @@ next-env.d.ts
 
 # Git worktrees
 .worktrees/
+.env
+.claude/
