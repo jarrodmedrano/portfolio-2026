@@ -1,0 +1,63 @@
+.card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+.cardInner {
+  border: 2px solid black;
+  overflow: hidden;
+  position: relative;
+  background: white;
+}
+
+.cardInner--inactive {
+  border-width: 1px;
+}
+
+.cardImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform 200ms ease-out;
+}
+
+.card:hover .cardImage {
+  transform: scale(1.02);
+}
+
+.ctaCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: black;
+  color: white;
+  padding: 2rem;
+}
+
+.ctaTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ctaText {
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.ctaCard--active .ctaTitle {
+  font-size: 2.5rem;
+}
+
+.ctaCard--active .ctaText {
+  font-size: 1.125rem;
+}

@@ -1,0 +1,36 @@
+.content {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  transition: opacity 200ms ease-out;
+}
+
+.content--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 0.5rem;
+}
+
+.techStack {
+  font-size: 0.875rem;
+  color: #737373;
+  margin-bottom: 0.5rem;
+}
+
+.link {
+  font-size: 0.875rem;
+  color: black;
+  text-decoration: underline;
+  transition: color 150ms ease-out;
+}
+
+.link:hover {
+  color: #525252;
+}

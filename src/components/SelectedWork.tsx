@@ -1,9 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { staggerContainer } from '@/lib/animations';
-import { projects } from '@/data/projects';
-import ProjectCard from './ProjectCard';
+import { carouselItems } from '@/data/projects';
+import Carousel3D from './Carousel3D';
 
 export default function SelectedWork() {
   return (
@@ -17,17 +15,8 @@ export default function SelectedWork() {
           <div className="h-px bg-black w-full" />
         </div>
 
-        {/* Projects List */}
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </motion.div>
+        {/* Carousel */}
+        <Carousel3D items={carouselItems} autoPlayInterval={5000} />
       </div>
     </section>
   );

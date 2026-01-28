@@ -1,3 +1,5 @@
+import type { CarouselItem } from '@/types/carousel';
+
 export interface Project {
   id: string;
   title: string;
@@ -52,5 +54,23 @@ export const projects: Project[] = [
     liveUrl: 'https://binary-quiz.example.com',
     codeUrl: 'https://github.com/jarrodmedrano/binary-quiz',
     imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Binary+Quiz',
+  },
+];
+
+export const carouselItems: CarouselItem[] = [
+  ...projects.map((p) => ({
+    type: 'project' as const,
+    id: p.id,
+    title: p.title,
+    imageUrl: p.imageUrl,
+    techStack: p.techStack,
+    projectUrl: p.liveUrl || p.codeUrl,
+  })),
+  {
+    type: 'cta' as const,
+    id: 'cta-work-together',
+    ctaTitle: "Let's Work Together",
+    ctaText: 'Start a Project →',
+    ctaLink: '#contact',
   },
 ];

@@ -1,52 +1,35 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { fadeInUp } from '@/lib/animations';
 import { Project } from '@/data/projects';
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
-  const isEven = index % 2 === 0;
-
+export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <motion.article
-      className="grid md:grid-cols-5 gap-8 items-center mb-16"
-      variants={fadeInUp}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      {/* Image - 60% width (3 columns) */}
-      <div
-        className={`md:col-span-3 ${isEven ? 'md:order-1' : 'md:order-2 md:col-start-3'}`}
-      >
-        <div className="relative aspect-video border border-black overflow-hidden group">
-          <Image
-            src={project.imageUrl}
-            alt={project.title}
-            width={800}
-            height={450}
-            className="object-cover w-full h-full transition-transform duration-200 group-hover:scale-102"
-          />
-        </div>
+    <article className="group">
+      {/* Image Container */}
+      <div className="relative aspect-video border border-black mb-6 overflow-hidden">
+        <Image
+          src={project.imageUrl}
+          alt={project.title}
+          width={800}
+          height={450}
+          className="object-cover w-full h-full transition-transform duration-200 group-hover:scale-105"
+        />
       </div>
 
-      {/* Content - 40% width (2 columns) */}
-      <div
-        className={`md:col-span-2 space-y-4 ${isEven ? 'md:order-2' : 'md:order-1 md:col-start-1 md:row-start-1'}`}
-      >
+      {/* Content Stack */}
+      <div className="space-y-4">
         {/* Client/Type Label */}
         <p className="text-xs uppercase tracking-wide text-gray-500 font-medium">
           {project.clientType}
         </p>
 
         {/* Project Title */}
-        <h3 className="text-2xl md:text-3xl font-bold text-black">
+        <h3 className="text-2xl font-bold text-black">
           {project.title}
         </h3>
 
@@ -68,7 +51,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         {/* Links */}
-        <div className="flex gap-4 text-base">
+        <div className="flex gap-4 text-sm">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
@@ -91,6 +74,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           )}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

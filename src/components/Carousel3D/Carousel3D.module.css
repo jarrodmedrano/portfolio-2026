@@ -1,0 +1,40 @@
+.container {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  overflow: visible;
+}
+
+@media (max-width: 1023px) {
+  .container {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    min-height: 450px;
+    overflow-x: hidden;
+  }
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
