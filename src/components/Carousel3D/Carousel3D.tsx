@@ -3,7 +3,7 @@
 'use client';
 
 import {
-  useState, useEffect, useCallback, useRef,
+  useState, useEffect, useCallback, useRef, useMemo,
 } from 'react';
 import { motion } from 'framer-motion';
 import type { CarouselItem } from '@/types/carousel';
@@ -80,6 +80,12 @@ export default function Carousel3D({
     }
   }, [navigateNext, navigatePrev]);
 
+  // Memoize transform calculations to prevent recalculating on every render
+  const cardTransforms = useMemo(
+    () => items.map((_, index) => getCardTransform(index, activeIndex, items.length)),
+    [activeIndex, items.length],
+  );
+
   useEffect(() => {
     if (!isAutoPlaying || isPausedByHover) {
       if (intervalRef.current) {
@@ -155,7 +161,7 @@ export default function Carousel3D({
         onDragEnd={handleDragEnd}
       >
         {items.map((item, index) => {
-          const transform = getCardTransform(index, activeIndex, items.length);
+          const transform = cardTransforms[index];
           return (
             <CarouselCard
               key={item.id}

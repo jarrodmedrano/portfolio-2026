@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import type { CarouselItem, CardTransform } from '@/types/carousel';
 import styles from './CardContent.module.css';
@@ -10,7 +11,7 @@ interface CardContentProps {
   cardHeight: number;
 }
 
-export default function CardContent({
+function CardContent({
   item,
   transform,
   cardHeight,
@@ -50,3 +51,6 @@ export default function CardContent({
     </motion.div>
   );
 }
+
+// Memoize component to prevent unnecessary re-renders
+export default memo(CardContent);

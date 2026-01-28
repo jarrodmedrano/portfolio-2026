@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import type { CarouselItem, CardTransform } from '@/types/carousel';
@@ -15,7 +16,7 @@ interface CarouselCardProps {
   reducedMotion?: boolean;
 }
 
-export default function CarouselCard({
+function CarouselCard({
   item,
   transform,
   isActive,
@@ -90,6 +91,8 @@ export default function CarouselCard({
               width={800}
               height={450}
               className={styles.cardImage}
+              priority={isActive}
+              loading={isActive ? 'eager' : 'lazy'}
             />
           ) : (
             <div
@@ -107,3 +110,6 @@ export default function CarouselCard({
     </>
   );
 }
+
+// Memoize component to prevent unnecessary re-renders
+export default memo(CarouselCard);
