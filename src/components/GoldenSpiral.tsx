@@ -4,13 +4,13 @@ import { motion } from 'framer-motion';
 
 export default function GoldenSpiral({ className = '' }: { className?: string }) {
   return (
-    <div className={`opacity-20 pointer-events-none ${className}`}>
-      <svg viewBox="0 0 100 100" className="w-full h-full stroke-orange-200 fill-none" strokeWidth="0.5">
+    <div className={`pointer-events-none ${className}`}>
+      <svg viewBox="0 0 100 100" className="w-full h-full stroke-accent-primary fill-none" strokeWidth="0.5">
         {/* Rough Golden Spiral representation */}
         <motion.path
           d="M50 50 L90 50 A40 40 0 0 1 50 90 A40 40 0 0 1 10 50 A40 40 0 0 1 50 10 A40 40 0 0 1 90 50"
           initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.5 }}
+          animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 2, ease: 'easeInOut' }}
         />
         <motion.rect
@@ -19,7 +19,7 @@ export default function GoldenSpiral({ className = '' }: { className?: string })
           width="40"
           height="40"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.3 }}
+          animate={{ opacity: 0.6 }}
           transition={{ delay: 1, duration: 1 }}
         />
         <motion.rect
@@ -28,7 +28,7 @@ export default function GoldenSpiral({ className = '' }: { className?: string })
           width="40"
           height="40"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.2 }}
+          animate={{ opacity: 0.4 }}
           transition={{ delay: 1.2, duration: 1 }}
         />
         <motion.rect
@@ -37,7 +37,7 @@ export default function GoldenSpiral({ className = '' }: { className?: string })
           width="40"
           height="40"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.1 }}
+          animate={{ opacity: 0.2 }}
           transition={{ delay: 1.4, duration: 1 }}
         />
       </svg>

@@ -61,35 +61,35 @@ export default function RecentThoughts() {
   };
 
   return (
-    <section id="thoughts" className="py-32 relative bg-[#121214]">
+    <section id="thoughts" className="py-32 relative bg-bg-surface">
       {/* Subtle top border */}
-      <div className="absolute top-0 left-0 w-full h-px bg-white/5" />
+      <div className="absolute top-0 left-0 w-full h-px bg-text-primary/5" />
 
       <div className="golden-container">
         <GoldenGrid
           main={(
             <div className="space-y-16">
               <div className="space-y-4">
-                <span className="text-orange-300/60 uppercase tracking-[0.2em] text-xs font-semibold">
+                <span className="text-accent-primary uppercase tracking-[0.2em] text-xs font-semibold">
                   Journal
                 </span>
-                <h2 className="text-4xl md:text-5xl font-bold text-white font-display">
+                <h2 className="text-4xl md:text-5xl font-bold text-text-primary font-display">
                   Recent
                   {' '}
-                  <span className="text-gray-600">Thoughts</span>
+                  <span className="text-text-secondary">Thoughts</span>
                 </h2>
-                <div className="w-16 h-1 bg-orange-500/20" />
+                <div className="w-16 h-1 bg-accent-primary/20" />
               </div>
 
-              <div className="relative border-l border-white/10 ml-3 md:ml-6 space-y-12 pb-12">
+              <div className="relative border-l border-text-primary/10 ml-3 md:ml-6 space-y-12 pb-12">
                 {loading && (
-                <p className="text-gray-500 pl-8">Accessing stream...</p>
+                <p className="text-text-tertiary pl-8">Accessing stream...</p>
                 )}
 
                 {error && (
                 <div className="pl-8">
-                  <p className="text-gray-500 mb-2">Connection unstable.</p>
-                  <a href={CONFIG.BLUESKY_PROFILE} className="text-orange-300 underline text-sm">View on BlueSky</a>
+                  <p className="text-text-tertiary mb-2">Connection unstable.</p>
+                  <a href={CONFIG.BLUESKY_PROFILE} className="text-accent-primary underline text-sm">View on BlueSky</a>
                 </div>
                 )}
 
@@ -104,23 +104,23 @@ export default function RecentThoughts() {
                     className="pl-8 relative group"
                   >
                     {/* Timeline Dot */}
-                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-white/20 border-2 border-[#121214] group-hover:bg-orange-400 group-hover:scale-125 transition-all duration-300" />
+                    <div className="absolute left-[-5px] top-6 w-2.5 h-2.5 rounded-full bg-text-primary/20 border-2 border-bg-surface group-hover:bg-accent-primary group-hover:border-accent-primary group-hover:scale-125 transition-all duration-300" />
 
                     <a
                       href={getBlueSkyUrl(post.uri)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block p-6 rounded-lg bg-white/5 border border-white/5 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1"
+                      className="block p-6 rounded-lg bg-bg-elevated/50 dark:bg-white/5 border border-text-primary/5 dark:border-white/5 hover:border-accent-primary/30 transition-all duration-300 hover:-translate-y-1"
                     >
-                      <p className="text-lg text-gray-300 leading-relaxed mb-4 group-hover:text-white transition-colors">
+                      <p className="text-lg text-text-secondary leading-relaxed mb-4 group-hover:text-text-primary transition-colors">
                         &ldquo;
                         {post.text}
                         &rdquo;
                       </p>
-                      <div className="flex items-center gap-2 text-xs text-gray-500 font-mono uppercase tracking-wide">
-                        <span className="text-orange-400/80">{formatDate(post.createdAt)}</span>
+                      <div className="flex items-center gap-2 text-xs text-text-tertiary font-mono uppercase tracking-wide">
+                        <span className="text-accent-primary">{formatDate(post.createdAt)}</span>
                         <span>•</span>
-                        <span className="group-hover:text-orange-300 transition-colors">Read Context →</span>
+                        <span className="group-hover:text-accent-primary transition-colors">Read Context →</span>
                       </div>
                     </a>
                   </motion.div>
@@ -132,11 +132,11 @@ export default function RecentThoughts() {
                   href={CONFIG.BLUESKY_PROFILE}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors uppercase tracking-widest font-semibold"
+                  className="inline-flex items-center gap-2 text-sm text-text-tertiary hover:text-text-primary transition-colors uppercase tracking-widest font-semibold"
                 >
                   Follow on BlueSky
                   {' '}
-                  <span className="text-orange-400">→</span>
+                  <span className="text-accent-primary">→</span>
                 </a>
               </div>
             </div>

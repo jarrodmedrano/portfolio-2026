@@ -11,7 +11,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <motion.article
-      className="group relative rounded-lg bg-white/5 overflow-hidden"
+      className="group relative rounded-lg bg-bg-surface dark:bg-white/5 overflow-hidden shadow-sm dark:shadow-none border border-border-subtle dark:border-transparent"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.3 }}
     >
@@ -26,12 +26,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       />
 
       <div
-        className="absolute inset-[-50%] bg-[conic-gradient(transparent_270deg,var(--accent-gold)_360deg)]
+        className="absolute inset-[-50%] bg-[conic-gradient(transparent_270deg,var(--accent-primary)_360deg)]
         opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-[spin_3s_linear_infinite]"
       />
 
       {/* Inner Content Mask (The "Card" Background) */}
-      <div className="absolute inset-[1px] bg-[#121214] rounded-lg z-0" />
+      <div className="absolute inset-[1px] bg-white dark:bg-[#121214] rounded-lg z-0" />
 
       {/* Actual Content */}
       <div className="relative z-10 p-4 space-y-4 h-full flex flex-col">
@@ -70,17 +70,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Content Stack */}
         <div className="flex-1 flex flex-col space-y-3">
           {/* Client/Type Label */}
-          <p className="text-xs uppercase tracking-[0.2em] text-orange-200/60 font-medium">
+          <p className="text-xs uppercase tracking-[0.2em] text-accent-primary font-medium">
             {project.clientType}
           </p>
 
           {/* Project Title */}
-          <h3 className="text-2xl font-bold text-white font-display">
+          <h3 className="text-2xl font-bold text-text-primary font-display">
             {project.title}
           </h3>
 
           {/* Description */}
-          <p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
+          <p className="text-sm text-text-secondary leading-relaxed line-clamp-3">
             {project.description}
           </p>
 
@@ -91,7 +91,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-1 text-[10px] uppercase tracking-wider border border-white/10 text-gray-400 rounded-sm"
+                className="px-2 py-1 text-[10px] uppercase tracking-wider border border-border-subtle dark:border-white/10 text-text-tertiary dark:text-gray-400 rounded-sm"
               >
                 {tech}
               </span>
@@ -99,13 +99,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
 
           {/* Links */}
-          <div className="flex gap-4 text-sm pt-2 border-t border-white/5 mt-auto">
+          <div className="flex gap-4 text-sm pt-2 border-t border-border-subtle dark:border-white/5 mt-auto">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-orange-200 hover:text-white transition-colors flex items-center gap-1 group/link"
+                className="text-accent-primary hover:text-text-primary dark:hover:text-white transition-colors flex items-center gap-1 group/link"
               >
                 View Live
                 <span className="group-hover/link:translate-x-0.5 transition-transform">→</span>
@@ -116,7 +116,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 href={project.codeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-white transition-colors"
+                className="text-text-secondary hover:text-text-primary dark:text-gray-500 dark:hover:text-white transition-colors"
               >
                 View Code
               </a>
