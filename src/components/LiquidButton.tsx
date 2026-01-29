@@ -77,7 +77,9 @@ export default function LiquidButton({ children, className = '', ...props }: Liq
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none"
         style={{
-          background: `radial-gradient(circle 100px at ${coords.x}px ${coords.y}px, var(--accent-primary), transparent)`,
+          background: 'var(--accent-gradient)',
+          maskImage: `radial-gradient(circle 100px at ${coords.x}px ${coords.y}px, black, transparent)`,
+          WebkitMaskImage: `radial-gradient(circle 100px at ${coords.x}px ${coords.y}px, black, transparent)`,
         }}
       />
     </button>

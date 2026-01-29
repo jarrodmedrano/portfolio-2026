@@ -34,6 +34,9 @@
   --space-13: 3.25rem;
   --space-21: 5.25rem;
   
+  /* Laser Beam Gradient (Light Mode - Oil Slick) */
+  --laser-beam: conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 260deg, #06b6d4 280deg, #10b981 310deg, #6366f1 340deg, #e11d48 360deg);
+
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', var(--font-sans);
@@ -55,6 +58,9 @@
   
   /* Seafoam Gradient for Dark Mode */
   --accent-gradient: linear-gradient(135deg, #fff 0%, #2dd4bf 100%);
+
+  /* Laser Beam Gradient (Dark Mode - Seafoam) */
+  --laser-beam: conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 320deg, #2dd4bf 360deg);
 
   --border-subtle: #27272a;
 }

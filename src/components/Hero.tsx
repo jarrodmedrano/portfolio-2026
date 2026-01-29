@@ -27,6 +27,13 @@ export default function Hero() {
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-bg-deep transition-colors duration-300"
     >
       {/* Background Decorative Elements */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30 dark:opacity-20"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #888888 1.5px, transparent 1.5px)',
+          backgroundSize: '40px 40px',
+        }}
+      />
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/5 to-transparent dark:from-[#ffffff05] dark:to-transparent pointer-events-none" />
       <GoldenSpiral className="absolute right-[-10%] top-[-10%] w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] opacity-50 dark:opacity-70" />
 

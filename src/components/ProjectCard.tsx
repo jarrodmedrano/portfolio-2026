@@ -19,15 +19,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
-          background:
-            'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 340deg, #d4af37 360deg)',
+          background: 'var(--laser-beam)',
           animation: 'spin 4s linear infinite',
         }}
       />
 
       <div
-        className="absolute inset-[-50%] bg-[conic-gradient(transparent_270deg,var(--accent-primary)_360deg)]
-        opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-[spin_3s_linear_infinite]"
+        className="absolute inset-[-50%] opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-[spin_3s_linear_infinite]"
+        style={{
+          background: 'var(--laser-beam)',
+        }}
       />
 
       {/* Inner Content Mask (The "Card" Background) */}
