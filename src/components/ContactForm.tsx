@@ -13,8 +13,8 @@ import LiquidButton from './LiquidButton';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Valid email is required'),
-  projectType: z.string().min(1, 'Please select a project type'),
+  email: z.email('Valid email is required'),
+  projectType: z.string().optional(),
   message: z.string().min(10, 'Message must be at least 10 characters'),
   budget: z.string().optional(),
   website: z.string().optional(), // Honeypot field
