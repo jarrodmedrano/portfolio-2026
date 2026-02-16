@@ -6,7 +6,7 @@ import { sendContactEmail } from '@/lib/sendgrid';
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
-  projectType: z.string().min(1, 'Please select a project type'),
+  projectType: z.string().optional(),
   message: z.string().min(10, 'Message must be at least 10 characters'),
   budget: z.string().optional(),
   website: z.string().optional(), // Honeypot field
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
       await sendContactEmail({
         name: validatedData.name,
         email: validatedData.email,
-        projectType: validatedData.projectType,
+        projectType: validatedData.projectType ?? '',
         message: validatedData.message,
         budget: validatedData.budget,
       });
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       data: {
         name: validatedData.name,
         email: validatedData.email,
-        projectType: validatedData.projectType,
+        projectType: validatedData.projectType ?? '',
         message: validatedData.message,
         budget: validatedData.budget,
       },
