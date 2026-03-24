@@ -1,4 +1,4 @@
-import sgMail from '@sendgrid/mail';
+import { Resend } from 'resend';
 
 interface ContactEmailData {
   name: string;
@@ -13,14 +13,13 @@ interface ContactEmailData {
  * @throws Error if email fails to send or if API key is not configured
  */
 export async function sendContactEmail(data: ContactEmailData): Promise<void> {
-  // Initialize SendGrid with API key (done at function call time for better testability)
-  const apiKey = process.env.SENDGRID_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    throw new Error('SENDGRID_API_KEY environment variable is not set');
+    throw new Error('RESEND_API_KEY environment variable is not set');
   }
-  sgMail.setApiKey(apiKey);
 
-  const fromEmail = process.env.SENDGRID_FROM_EMAIL || 'noreply@jarrodmedrano.com';
+  const resend = new Resend(apiKey);
+  const fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@jarrodmedrano.com';
   const toEmail = 'jarrod@jarrodmedrano.com';
 
   const htmlContent = `
@@ -145,20 +144,21 @@ ${data.message}
 Submitted from jarrodmedrano.com contact form
   `.trim();
 
-  const msg = {
-    to: toEmail,
-    from: fromEmail,
-    subject: `New Contact Form Submission from ${data.name}`,
-    text: textContent,
-    html: htmlContent,
-  };
-
   try {
-    await sgMail.send(msg);
+    const { error } = await resend.emails.send({
+      from: fromEmail,
+      to: toEmail,
+      subject: `New Contact Form Submission from ${data.name}`,
+      text: textContent,
+      html: htmlContent,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
   } catch (error) {
-    // Log the error for debugging but throw a generic message
     // eslint-disable-next-line no-console
-    console.error('SendGrid error:', error);
+    console.error('Resend error:', error);
     throw new Error('Failed to send email notification');
   }
 }

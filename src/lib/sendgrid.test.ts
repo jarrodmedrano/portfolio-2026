@@ -1,26 +1,23 @@
 import {
   describe, it, expect, beforeEach, vi,
 } from 'vitest';
-import type { Mock } from 'vitest';
-import sgMail from '@sendgrid/mail';
 import { sendContactEmail } from './sendgrid';
 
-// Mock SendGrid
-vi.mock('@sendgrid/mail', () => ({
-  default: {
-    setApiKey: vi.fn(),
-    send: vi.fn(),
+// Mock Resend
+const mockSend = vi.fn();
+vi.mock('resend', () => ({
+  Resend: class {
+    emails = { send: mockSend };
   },
 }));
-
-const mockSend = sgMail.send as Mock;
 
 describe('sendContactEmail', () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    mockSend.mockResolvedValue({ data: { id: 'test-id' }, error: null });
     // Set required environment variables
-    process.env.SENDGRID_API_KEY = 'test-api-key';
-    process.env.SENDGRID_FROM_EMAIL = 'test@example.com';
+    process.env.RESEND_API_KEY = 'test-api-key';
+    process.env.RESEND_FROM_EMAIL = 'test@example.com';
   });
 
   const baseContactData = {
@@ -36,11 +33,9 @@ describe('sendContactEmail', () => {
       budget: '$10k-25k',
     };
 
-    mockSend.mockResolvedValue([{ statusCode: 202 }]);
-
     await sendContactEmail(contactData);
 
-    expect(sgMail.send).toHaveBeenCalledTimes(1);
+    expect(mockSend).toHaveBeenCalledTimes(1);
     const callArgs = mockSend.mock.calls[0][0];
 
     expect(callArgs.to).toBe('jarrod@jarrodmedrano.com');
@@ -57,11 +52,9 @@ describe('sendContactEmail', () => {
   });
 
   it('sends email with optional budget field missing', async () => {
-    mockSend.mockResolvedValue([{ statusCode: 202 }]);
-
     await sendContactEmail(baseContactData);
 
-    expect(sgMail.send).toHaveBeenCalledTimes(1);
+    expect(mockSend).toHaveBeenCalledTimes(1);
     const callArgs = mockSend.mock.calls[0][0];
 
     expect(callArgs.text).toContain('John Doe');
@@ -72,8 +65,6 @@ describe('sendContactEmail', () => {
   });
 
   it('formats email subject with contact name', async () => {
-    mockSend.mockResolvedValue([{ statusCode: 202 }]);
-
     await sendContactEmail({ ...baseContactData, name: 'Jane Smith' });
 
     const callArgs = mockSend.mock.calls[0][0];
@@ -81,16 +72,22 @@ describe('sendContactEmail', () => {
   });
 
   it('includes mailto link for email in HTML', async () => {
-    mockSend.mockResolvedValue([{ statusCode: 202 }]);
-
     await sendContactEmail(baseContactData);
 
     const callArgs = mockSend.mock.calls[0][0];
     expect(callArgs.html).toContain('href="mailto:john@example.com"');
   });
 
-  it('throws error when SendGrid fails', async () => {
-    mockSend.mockRejectedValue(new Error('SendGrid API error'));
+  it('throws error when Resend returns an error', async () => {
+    mockSend.mockResolvedValue({ data: null, error: { message: 'Resend API error' } });
+
+    await expect(sendContactEmail(baseContactData)).rejects.toThrow(
+      'Failed to send email notification',
+    );
+  });
+
+  it('throws error when Resend send rejects', async () => {
+    mockSend.mockRejectedValue(new Error('Network error'));
 
     await expect(sendContactEmail(baseContactData)).rejects.toThrow(
       'Failed to send email notification',
@@ -98,8 +95,7 @@ describe('sendContactEmail', () => {
   });
 
   it('uses default from email if not set in environment', async () => {
-    delete process.env.SENDGRID_FROM_EMAIL;
-    mockSend.mockResolvedValue([{ statusCode: 202 }]);
+    delete process.env.RESEND_FROM_EMAIL;
 
     await sendContactEmail(baseContactData);
 
@@ -109,7 +105,6 @@ describe('sendContactEmail', () => {
 
   it('preserves message formatting in plain text', async () => {
     const multilineMessage = 'Line 1\nLine 2\nLine 3';
-    mockSend.mockResolvedValue([{ statusCode: 202 }]);
 
     await sendContactEmail({
       ...baseContactData,
@@ -122,7 +117,6 @@ describe('sendContactEmail', () => {
 
   it('escapes HTML in message content', async () => {
     const messageWithHtml = '<script>alert("xss")</script>';
-    mockSend.mockResolvedValue([{ statusCode: 202 }]);
 
     await sendContactEmail({
       ...baseContactData,
@@ -130,7 +124,14 @@ describe('sendContactEmail', () => {
     });
 
     const callArgs = mockSend.mock.calls[0][0];
-    // HTML should contain the raw string (SendGrid handles escaping)
     expect(callArgs.html).toContain(messageWithHtml);
+  });
+
+  it('throws error when RESEND_API_KEY is not set', async () => {
+    delete process.env.RESEND_API_KEY;
+
+    await expect(sendContactEmail(baseContactData)).rejects.toThrow(
+      'RESEND_API_KEY environment variable is not set',
+    );
   });
 });
