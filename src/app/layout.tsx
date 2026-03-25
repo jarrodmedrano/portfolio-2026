@@ -14,6 +14,57 @@ const outfit = Outfit({
   variable: '--font-display',
 });
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://www.jarrodmedrano.com/#person',
+      name: 'Jarrod Medrano',
+      jobTitle: 'Freelance Software Engineer',
+      description: 'Freelance software engineer based in Austin, TX specializing in React, Next.js, TypeScript, and full-stack web development. Available for startups, small businesses, and enterprise contracts.',
+      url: 'https://www.jarrodmedrano.com',
+      image: 'https://www.jarrodmedrano.com/og-image.jpg',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Austin',
+        addressRegion: 'TX',
+        addressCountry: 'US',
+      },
+      sameAs: [
+        'https://github.com/jarrodmedrano',
+        'https://www.linkedin.com/in/jarrod-medrano-b89b0037',
+        'https://bsky.app/profile/jarrodmedrano.bsky.social',
+      ],
+      knowsAbout: [
+        'React', 'Next.js', 'TypeScript', 'JavaScript', 'Node.js',
+        'PostgreSQL', 'GraphQL', 'AWS', 'Docker', 'Tailwind CSS',
+        'Web Development', 'Software Engineering', 'MVP Development',
+      ],
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': 'https://www.jarrodmedrano.com/#service',
+      name: 'Jarrod Medrano – Freelance Software Engineering',
+      description: 'Freelance web development and software engineering services in Austin, TX. MVP development, production applications, and technical consulting for startups, small businesses, and enterprise clients.',
+      url: 'https://www.jarrodmedrano.com/services',
+      provider: { '@id': 'https://www.jarrodmedrano.com/#person' },
+      areaServed: [
+        { '@type': 'City', name: 'Austin', containedIn: 'Texas, United States' },
+        { '@type': 'Country', name: 'United States' },
+      ],
+      serviceType: [
+        'Freelance Web Development',
+        'MVP Development',
+        'React Development',
+        'Next.js Development',
+        'Full-Stack Development',
+        'Technical Consulting',
+      ],
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   icons: {
     icon: '/favicon.svg',
@@ -21,22 +72,30 @@ export const metadata: Metadata = {
     apple: '/favicon.svg',
   },
   title: {
-    default: 'Jarrod Medrano | Senior Front End Engineer',
+    default: 'Jarrod Medrano | Freelance Software Engineer – Austin, TX',
     template: '%s | Jarrod Medrano',
   },
   description:
-    'Senior Front End Engineer specializing in React, TypeScript, and modern web technologies. Building exceptional user experiences with a focus on performance and accessibility.',
+    'Freelance software engineer in Austin, TX specializing in React, Next.js, and TypeScript. Available for MVP development, production apps, and technical consulting for startups, businesses, and enterprise.',
   keywords: [
+    'Freelance Software Engineer Austin',
+    'Freelance Web Developer Austin TX',
+    'Austin React Developer',
+    'Hire Software Engineer Austin',
+    'Austin Next.js Developer',
+    'Austin TypeScript Developer',
+    'Freelance Frontend Developer Austin',
+    'Austin Full Stack Developer',
+    'Web Developer Austin Texas',
+    'Contract Software Engineer Austin',
+    'MVP Development Austin',
+    'React Developer for Hire',
+    'Software Engineer Texas',
+    'Jarrod Medrano',
     'Front End Engineer',
-    'React Developer',
     'TypeScript',
-    'JavaScript',
-    'Web Development',
-    'UI/UX',
-    'Performance Optimization',
-    'Accessibility',
     'Next.js',
-    'Software Engineer',
+    'Node.js',
   ],
   authors: [{ name: 'Jarrod Medrano' }],
   creator: 'Jarrod Medrano',
@@ -57,23 +116,23 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://www.jarrodmedrano.com',
     siteName: 'Jarrod Medrano',
-    title: 'Jarrod Medrano | Senior Front End Engineer',
+    title: 'Jarrod Medrano | Freelance Software Engineer – Austin, TX',
     description:
-      'Senior Front End Engineer specializing in React, TypeScript, and modern web technologies. Building exceptional user experiences with a focus on performance and accessibility.',
+      'Freelance software engineer in Austin, TX. React, Next.js, TypeScript. Available for startups, small businesses, and enterprise contracts.',
     images: [
       {
         url: 'https://www.jarrodmedrano.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Jarrod Medrano - Senior Front End Engineer',
+        alt: 'Jarrod Medrano - Freelance Software Engineer Austin TX',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jarrod Medrano | Senior Front End Engineer',
+    title: 'Jarrod Medrano | Freelance Software Engineer – Austin, TX',
     description:
-      'Senior Front End Engineer specializing in React, TypeScript, and modern web technologies.',
+      'Freelance software engineer in Austin, TX. React, Next.js, TypeScript. Available for hire.',
     images: ['https://www.jarrodmedrano.com/og-image.jpg'],
     creator: '@jarrodmedrano',
   },
@@ -106,6 +165,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
         </ThemeProvider>

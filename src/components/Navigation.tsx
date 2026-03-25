@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { ThemeToggle } from './ThemeToggle';
 
@@ -12,6 +14,8 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState('hero');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   useEffect(() => {
     setMounted(true);
@@ -66,6 +70,11 @@ export default function Navigation() {
     { id: 'contact', label: 'Contact' },
   ];
 
+  const pageLinks = [
+    { href: '/about', label: 'About' },
+    { href: '/services', label: 'Services' },
+  ];
+
   return (
     <>
       <motion.nav
@@ -91,18 +100,41 @@ export default function Navigation() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => scrollToSection(item.id)}
+                isHome ? (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => scrollToSection(item.id)}
+                    className={`text-sm tracking-wide uppercase transition-all hover:text-accent-primary relative ${
+                      activeSection === item.id
+                        ? 'text-neutral-900 dark:text-white after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[1px] after:bg-accent-primary/50'
+                        : 'text-neutral-500 dark:text-gray-400'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.id}
+                    href={`/#${item.id}`}
+                    className="text-sm tracking-wide uppercase transition-all hover:text-accent-primary text-neutral-500 dark:text-gray-400"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              ))}
+              {pageLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
                   className={`text-sm tracking-wide uppercase transition-all hover:text-accent-primary relative ${
-                    activeSection === item.id
+                    pathname === link.href
                       ? 'text-neutral-900 dark:text-white after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[1px] after:bg-accent-primary/50'
                       : 'text-neutral-500 dark:text-gray-400'
                   }`}
                 >
-                  {item.label}
-                </button>
+                  {link.label}
+                </Link>
               ))}
             </div>
 
@@ -166,18 +198,43 @@ export default function Navigation() {
                   <nav className="flex-1 overflow-y-auto p-6">
                     <div className="flex flex-col gap-2">
                       {navItems.map((item) => (
-                        <button
-                          key={item.id}
-                          type="button"
-                          onClick={() => scrollToSection(item.id)}
+                        isHome ? (
+                          <button
+                            key={item.id}
+                            type="button"
+                            onClick={() => scrollToSection(item.id)}
+                            className={`text-left px-4 py-3 rounded-md text-base tracking-wide uppercase transition-all ${
+                              activeSection === item.id
+                                ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white font-semibold'
+                                : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900 hover:text-neutral-900 dark:hover:text-white'
+                            }`}
+                          >
+                            {item.label}
+                          </button>
+                        ) : (
+                          <Link
+                            key={item.id}
+                            href={`/#${item.id}`}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="text-left px-4 py-3 rounded-md text-base tracking-wide uppercase transition-all text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900 hover:text-neutral-900 dark:hover:text-white"
+                          >
+                            {item.label}
+                          </Link>
+                        )
+                      ))}
+                      {pageLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setMobileMenuOpen(false)}
                           className={`text-left px-4 py-3 rounded-md text-base tracking-wide uppercase transition-all ${
-                            activeSection === item.id
+                            pathname === link.href
                               ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white font-semibold'
                               : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-900 hover:text-neutral-900 dark:hover:text-white'
                           }`}
                         >
-                          {item.label}
-                        </button>
+                          {link.label}
+                        </Link>
                       ))}
                     </div>
                   </nav>

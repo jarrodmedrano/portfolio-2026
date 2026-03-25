@@ -47,9 +47,15 @@ export default function Hero() {
             animate="animate"
           >
             <motion.div variants={fadeInUp} className="space-y-2">
-              <span className="text-gradient-gold uppercase tracking-[0.2em] text-sm font-medium">
-                Portfolio 2026
-              </span>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-gradient-gold uppercase tracking-[0.2em] text-sm font-medium">
+                  Portfolio 2026
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-primary/10 border border-accent-primary/20 text-xs font-medium text-accent-primary">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Austin, TX · Available for Freelance
+                </span>
+              </div>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter">
                 <span className="block text-text-primary">Jarrod</span>
                 <span className="block text-text-secondary dark:text-text-tertiary">Medrano</span>
