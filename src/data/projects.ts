@@ -60,7 +60,7 @@ export const projects: Project[] = [
     description:
       'Interactive guitar fretboard visualization tool for learning scales, chords, and intervals. Features customizable tunings and theory reference.',
     techStack: ['React', 'Next.js', 'Tailwind', 'Framer Motion'],
-    liveUrl: 'https://guitar-fretboard-six.vercel.app/',
+    liveUrl: 'https://www.fretboard-master.com/',
     codeUrl: 'https://github.com/jarrodmedrano/guitar-fretboard',
     imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Guitar+Fretboard',
   },
