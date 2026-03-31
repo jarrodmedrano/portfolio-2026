@@ -11,15 +11,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'portuguese-verbs',
-    title: 'Portuguese Verb Conjugator',
+    id: 'conjugame',
+    title: 'Conjugame',
     clientType: 'Personal Project',
     description:
-      'AI-powered Portuguese language learning tool with real-time verb conjugation, pronunciation guides, and interactive exercises. Built with OpenAI API for natural language processing.',
-    techStack: ['Next.js', 'TypeScript', 'OpenAI', 'Tailwind', 'Vercel'],
-    liveUrl: 'https://github.com/jarrodmedrano/portuguese-verbs',
+      'A verb conjugation game supporting multiple languages. Players practice and master verb forms across tenses through interactive, game-based exercises.',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind', 'Vercel'],
+    liveUrl: 'https://conjugame.org',
     codeUrl: 'https://github.com/jarrodmedrano/portuguese-verbs',
-    imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Portuguese+Verbs',
+    imageUrl: 'https://placehold.co/800x450/000000/FFFFFF/png?text=Conjugame',
   },
   {
     id: 'jarrod-starter',
